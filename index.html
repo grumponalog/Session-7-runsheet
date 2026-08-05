@@ -338,6 +338,9 @@
     font:700 10px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--dimmer);
   }
 
+  /* jump targets must clear the sticky header */
+  .beat,.card,.loc,.stat,.who,.mech{scroll-margin-top:132px}
+
   /* ---------- cross-tab jump chips ---------- */
   .jump{
     display:inline-flex;align-items:center;gap:6px;cursor:pointer;
@@ -959,7 +962,7 @@
     <p class="note"><b>Order that works:</b> remains → coroner's sheets → the arithmetic → the house. The knife confirms what they already worked out.</p>
     <span class="drop">knife <span class="ch">#evidence · after the sheets only</span></span>
   
-    <div class="dev"><div class="sub">Development</div><p>Confirmation of something they already worked out — which is the only way it should ever arrive.</p><ul class="ifthen"><li><b>Order that works</b> — remains, then coroner's sheets, then the arithmetic, then the house.</li></ul></div>
+    <div class="dev"><div class="sub">Development</div><p>Confirmation of something they already worked out — which is the only way it should ever arrive.</p><ul class="ifthen"><li><b>If they find the knife before the remains</b> — you gated it wrong. Make it a box they cannot get open until the wound angle is on the table.</li><li><b>If they never search the house at all</b> — fine. The arithmetic already convicted him. The knife was only ever a receipt.</li></ul></div>
   </div>
 
   <div class="beat" id="b-drive">
