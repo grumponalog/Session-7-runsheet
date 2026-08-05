@@ -7,246 +7,385 @@
 <style>
   *,*::before,*::after{box-sizing:border-box}
   :root{
-    --bg:#0d0e10;
-    --panel:#15171b;
-    --panel2:#1b1e23;
-    --line:#25292f;
-    --line2:#33383f;
-    --ink:#e6e4df;
-    --dim:#9096a0;
-    --dimmer:#6b7078;
-    --spoken:#d9a256;
-    --drop:#7fa8bd;
-    --never:#c2564b;
+    /* parchment palette — variable names preserved so inline styles keep working */
+    --bg:#FBF1DA;
+    --panel:#F6EACE;
+    --panel2:#EFE0C0;
+    --line:#DCC9A4;
+    --line2:#C0A374;
+    --ink:#241A12;
+    --dim:#584836;
+    --dimmer:#7C6952;
+    --spoken:#8A6A2F;      /* read-aloud — gold */
+    --drop:#1F4A5C;        /* image drop — ink blue */
+    --never:#58180D;       /* hard don't — D&D red */
+    --red:#58180D;
+    --red2:#7A2A16;
     --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
-    --serif:Georgia,"Iowan Old Style","Palatino Linotype",serif;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
   }
   html,body{margin:0;padding:0}
   body{
-    background:var(--bg);color:var(--ink);
-    font:15px/1.6 var(--sans);
+    background:var(--bg);
+    background-image:
+      radial-gradient(ellipse at 12% 8%, rgba(160,120,60,.055), transparent 55%),
+      radial-gradient(ellipse at 88% 70%, rgba(140,100,50,.05), transparent 55%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
+    background-attachment:fixed;
+    color:var(--ink);
+    font:16.5px/1.62 var(--serif);
     -webkit-font-smoothing:antialiased;
   }
 
   /* ---------- header ---------- */
   header{
     position:sticky;top:0;z-index:50;
-    background:rgba(13,14,16,.94);
-    backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--line);
+    background:rgba(251,241,218,.96);
+    backdrop-filter:blur(6px);
+    border-bottom:3px double var(--line2);
   }
-  .hwrap{max-width:1120px;margin:0 auto;padding:14px 24px 0}
+  .hwrap{max-width:1080px;margin:0 auto;padding:16px 30px 0}
   .titlerow{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
   h1{
-    margin:0;font-size:17px;font-weight:650;letter-spacing:-.01em;
+    margin:0;font-family:var(--serif);font-size:20px;font-weight:600;
+    color:var(--red);letter-spacing:.06em;text-transform:uppercase;
   }
-  h1 span{color:var(--dimmer);font-weight:400}
+  h1 span{color:var(--dimmer);font-weight:400;letter-spacing:.04em}
   .status{
-    margin-left:auto;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
-    color:var(--dimmer);
+    margin-left:auto;font:600 10.5px/1 var(--sans);letter-spacing:.16em;
+    text-transform:uppercase;color:var(--dimmer);
+    border:1px solid var(--line2);border-radius:2px;padding:5px 9px;
   }
-  nav{display:flex;gap:2px;margin-top:12px;overflow-x:auto;scrollbar-width:none}
+  nav{display:flex;gap:0;margin-top:14px;overflow-x:auto;scrollbar-width:none}
   nav::-webkit-scrollbar{display:none}
   nav button{
-    appearance:none;background:none;border:0;border-bottom:2px solid transparent;
-    color:var(--dim);font:inherit;font-size:13px;font-weight:550;
-    padding:9px 14px 10px;cursor:pointer;white-space:nowrap;
-    letter-spacing:.02em;transition:color .12s,border-color .12s;
+    appearance:none;background:none;border:0;border-bottom:3px solid transparent;
+    color:var(--dim);font:600 13px/1 var(--sans);
+    padding:10px 15px 11px;cursor:pointer;white-space:nowrap;
+    letter-spacing:.09em;text-transform:uppercase;transition:color .12s,border-color .12s;
   }
-  nav button:hover{color:var(--ink)}
-  nav button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--spoken)}
-  nav button kbd{
-    font:inherit;font-size:10px;color:var(--dimmer);margin-right:6px;
-  }
-  nav button[aria-selected="true"] kbd{color:var(--spoken)}
+  nav button:hover{color:var(--red2)}
+  nav button[aria-selected="true"]{color:var(--red);border-bottom-color:var(--red)}
+  nav button kbd{font:inherit;font-size:10px;color:var(--dimmer);margin-right:6px}
+  nav button[aria-selected="true"] kbd{color:var(--red2)}
 
   .strip{
-    max-width:1120px;margin:0 auto;padding:8px 24px 10px;
-    font-size:11.5px;color:var(--dimmer);
-    display:flex;gap:20px;flex-wrap:wrap;
+    max-width:1080px;margin:0 auto;padding:9px 30px 11px;
+    font:12.5px/1.4 var(--sans);color:var(--dimmer);
+    display:flex;gap:24px;flex-wrap:wrap;
     border-top:1px solid var(--line);
   }
-  .strip b{color:var(--dim);font-weight:600}
+  .strip b{color:var(--red2);font-weight:650}
 
   /* ---------- layout ---------- */
-  main{max-width:1120px;margin:0 auto;padding:30px 24px 120px}
+  main{max-width:1080px;margin:0 auto;padding:34px 30px 140px}
   .tab{display:none}
   .tab.on{display:block;animation:in .18s ease}
   @keyframes in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 
   h2{
-    font-size:12px;letter-spacing:.16em;text-transform:uppercase;
-    color:var(--dimmer);font-weight:650;
-    margin:0 0 16px;padding-bottom:10px;border-bottom:1px solid var(--line);
+    font-family:var(--serif);font-size:26px;font-weight:600;
+    letter-spacing:.05em;text-transform:uppercase;color:var(--red);
+    margin:0 0 6px;padding:0;border:0;
   }
-  h2 em{font-style:normal;color:var(--dim);letter-spacing:.06em;text-transform:none;font-weight:400;float:right}
-  h3{font-size:16px;font-weight:620;margin:0 0 8px;letter-spacing:-.01em}
-  p{margin:0 0 12px}
+  h2 em{
+    font-style:italic;color:var(--dimmer);letter-spacing:.01em;
+    text-transform:none;font-weight:400;font-size:16px;float:right;
+    padding-top:11px;
+  }
+  h2::after{
+    content:"";display:block;clear:both;height:5px;margin-top:9px;margin-bottom:22px;
+    background:var(--red);
+    clip-path:polygon(0 50%,9px 0,calc(100% - 9px) 0,100% 50%,calc(100% - 9px) 100%,9px 100%);
+  }
+  h3{
+    font-family:var(--serif);font-size:18.5px;font-weight:600;
+    color:var(--red2);margin:0 0 9px;letter-spacing:.005em;
+  }
+  p{margin:0 0 13px}
   p:last-child{margin-bottom:0}
   a{color:var(--drop)}
-  ul{margin:0 0 12px;padding-left:20px}
-  li{margin-bottom:6px}
+  ul{margin:0 0 13px;padding-left:22px}
+  li{margin-bottom:7px}
   li:last-child{margin-bottom:0}
-  strong{font-weight:640;color:#f2f0eb}
-  em{color:var(--dim)}
+  strong{font-weight:700;color:#160F09}
+  em{color:inherit}
+  .lede::first-letter{
+    float:left;font-family:var(--serif);font-size:56px;line-height:.82;
+    font-weight:600;color:var(--red);margin:5px 9px 0 0;
+  }
 
-  /* ---------- cards ---------- */
+  /* ---------- cards / beats ---------- */
   .card{
-    background:var(--panel);border:1px solid var(--line);border-radius:6px;
-    padding:20px 22px;margin-bottom:14px;
+    background:var(--panel);border:1px solid var(--line2);
+    box-shadow:0 1px 0 rgba(120,90,50,.12);
+    padding:22px 26px;margin-bottom:16px;
   }
   .beat{
-    background:var(--panel);border:1px solid var(--line);border-left:2px solid var(--line2);
-    border-radius:0 6px 6px 0;padding:18px 22px;margin-bottom:12px;
+    background:var(--panel);border:1px solid var(--line);
+    border-left:4px solid var(--line2);
+    padding:20px 26px;margin-bottom:14px;
   }
-  .beat > h3{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .beat > h3{display:flex;align-items:center;gap:11px;flex-wrap:wrap}
   .time{
-    font-size:11px;color:var(--dimmer);font-weight:500;letter-spacing:.04em;
-    border:1px solid var(--line2);border-radius:3px;padding:2px 7px;
+    font:600 10.5px/1 var(--sans);color:var(--dimmer);letter-spacing:.12em;
+    text-transform:uppercase;
+    border:1px solid var(--line2);border-radius:2px;padding:4px 8px;
   }
 
-  /* ---------- signal colors ---------- */
+  /* ---------- signal treatments ---------- */
   .say{
-    border-left:2px solid var(--spoken);
-    background:rgba(217,162,86,.05);
-    padding:14px 18px;margin:14px 0;border-radius:0 4px 4px 0;
-    font:16px/1.7 var(--serif);color:#efe7da;
+    border:1px solid var(--line2);border-left:5px solid var(--spoken);
+    background:#EFE2C4;
+    padding:16px 20px;margin:16px 0;
+    font:italic 17px/1.68 var(--serif);color:#2B2015;
   }
   .say::before{
-    content:"READ ALOUD";display:block;
-    font:600 10px/1 var(--sans);letter-spacing:.16em;color:var(--spoken);
-    margin-bottom:9px;
+    content:"Read aloud";display:block;font:600 10.5px/1 var(--sans);
+    letter-spacing:.18em;text-transform:uppercase;color:var(--spoken);
+    font-style:normal;margin-bottom:10px;
   }
   .line{
-    font:16px/1.6 var(--serif);color:var(--spoken);
-    border-left:2px solid var(--spoken);padding-left:14px;margin:12px 0;
+    font:italic 17.5px/1.6 var(--serif);color:var(--red2);
+    border-left:5px solid var(--spoken);padding-left:16px;margin:14px 0;
   }
   .never{
-    border-left:2px solid var(--never);
-    background:rgba(194,86,75,.06);
-    padding:12px 16px;margin:12px 0;border-radius:0 4px 4px 0;
-    font-size:14px;
+    border:1px solid var(--never);border-left:5px solid var(--never);
+    background:rgba(88,24,13,.055);
+    padding:14px 18px;margin:14px 0;
+    font:15px/1.55 var(--sans);color:#3A1409;
   }
   .never::before{
-    content:"DO NOT";display:block;
-    font:600 10px/1 var(--sans);letter-spacing:.16em;color:var(--never);margin-bottom:7px;
+    content:"Do not";display:block;font:700 10.5px/1 var(--sans);
+    letter-spacing:.18em;text-transform:uppercase;color:var(--never);margin-bottom:8px;
   }
   .drop{
     display:inline-flex;align-items:center;gap:7px;
-    border:1px solid rgba(127,168,189,.35);background:rgba(127,168,189,.08);
-    color:var(--drop);border-radius:4px;padding:3px 9px;
-    font-size:12px;font-weight:550;letter-spacing:.01em;
-    margin:3px 4px 3px 0;
+    border:1px solid rgba(31,74,92,.4);background:rgba(31,74,92,.07);
+    color:var(--drop);padding:4px 10px;
+    font:600 12.5px/1.3 var(--sans);letter-spacing:.02em;
+    margin:4px 5px 4px 0;
   }
-  .drop::before{content:"▸";font-size:9px;opacity:.7}
-  .drop .ch{color:var(--dimmer);font-weight:400;font-size:11px}
-  .note{font-size:13.5px;color:var(--dim);margin:10px 0 0}
-  .note b{color:var(--ink)}
+  .drop::before{content:"▸";font-size:9px;opacity:.75}
+  .drop .ch{color:var(--dimmer);font-weight:400;font-size:11.5px}
+  .note{
+    font:14.5px/1.6 var(--sans);color:var(--dim);margin:12px 0 0;
+    padding-left:14px;border-left:2px solid var(--line2);
+  }
+  .note b{color:var(--red2);font-weight:700}
 
-  /* ---------- mechanic ---------- */
+  /* ---------- mechanic accordions ---------- */
   .mech{margin-bottom:14px}
   .mech > summary{
     cursor:pointer;list-style:none;
-    background:var(--panel);border:1px solid var(--line);border-radius:6px;
-    padding:14px 20px;display:flex;align-items:baseline;gap:12px;
-    font-weight:620;font-size:15px;
+    background:var(--panel);border:1px solid var(--line2);
+    padding:15px 22px;display:flex;align-items:baseline;gap:13px;
+    font-family:var(--serif);font-weight:600;font-size:17.5px;color:var(--red2);
   }
   .mech > summary::-webkit-details-marker{display:none}
-  .mech > summary::after{content:"+";margin-left:auto;color:var(--dimmer);font-weight:400}
+  .mech > summary::after{content:"+";margin-left:auto;color:var(--line2);font-weight:400;font-size:19px}
   .mech[open] > summary::after{content:"–"}
-  .mech[open] > summary{border-radius:6px 6px 0 0;border-bottom:0}
+  .mech[open] > summary{border-bottom:0}
   .mech .num{
-    color:var(--dimmer);font-size:12px;font-weight:600;
-    border:1px solid var(--line2);border-radius:3px;padding:1px 6px;
+    font:700 11.5px/1 var(--sans);color:#fff;background:var(--red);
+    border-radius:2px;padding:4px 7px;letter-spacing:.06em;
   }
   .mech .body{
-    background:var(--panel);border:1px solid var(--line);border-top:1px solid var(--line);
-    border-radius:0 0 6px 6px;padding:4px 20px 18px;
+    background:var(--panel);border:1px solid var(--line2);border-top:1px dashed var(--line2);
+    padding:6px 22px 20px;
   }
 
   /* ---------- clock ---------- */
-  .clock{display:flex;gap:0;margin:0 0 14px;border:1px solid var(--line);border-radius:6px;overflow:hidden}
-  .clock div{flex:1;padding:14px 16px;background:var(--panel);border-right:1px solid var(--line)}
+  .clock{display:flex;gap:0;margin:0 0 16px;border:1px solid var(--line2)}
+  .clock div{flex:1;padding:16px 18px;background:var(--panel);border-right:1px solid var(--line)}
   .clock div:last-child{border-right:0}
-  .clock .t{font:650 19px/1 var(--sans);letter-spacing:-.02em;margin-bottom:6px}
-  .clock .d{font-size:12.5px;color:var(--dim);line-height:1.45}
+  .clock .t{font:600 22px/1 var(--serif);color:var(--red2);letter-spacing:.02em;margin-bottom:7px}
+  .clock .d{font:13.5px/1.5 var(--sans);color:var(--dim)}
   .clock div:nth-child(3) .t{color:var(--never)}
 
   /* ---------- stat block ---------- */
-  .stat{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:22px;margin-bottom:16px}
-  .stat h3{font-size:19px;margin-bottom:2px}
-  .stat .type{color:var(--dim);font-size:13px;font-style:italic;margin-bottom:14px}
-  .stat .cr{
-    float:right;font:650 12px/1 var(--sans);letter-spacing:.08em;
-    color:var(--spoken);border:1px solid rgba(217,162,86,.4);border-radius:3px;padding:5px 9px;
+  .stat{
+    background:#FDF6E4;border:1px solid var(--line2);
+    border-top:5px solid var(--red);border-bottom:5px solid var(--red);
+    box-shadow:0 1px 3px rgba(120,90,50,.2);
+    padding:22px 26px;margin-bottom:20px;
   }
-  .rule{height:1px;background:var(--line2);margin:14px 0}
-  .abils{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:4px;overflow:hidden;margin:14px 0}
-  .abils div{background:var(--panel2);padding:9px 6px;text-align:center}
-  .abils .k{font-size:10px;letter-spacing:.1em;color:var(--dimmer);font-weight:600;margin-bottom:3px}
-  .abils .v{font-size:14px;font-weight:600}
-  .kv{font-size:13.5px;margin-bottom:5px;color:var(--dim)}
-  .kv b{color:var(--ink);font-weight:620}
-  .act{margin-bottom:12px;font-size:14px}
-  .act .n{font-weight:640;font-style:italic;color:#f2f0eb}
+  .stat h3{
+    font-size:25px;margin-bottom:2px;color:var(--red);
+    letter-spacing:.03em;font-variant:small-caps;
+  }
+  .stat .type{color:var(--dim);font-size:14.5px;font-style:italic;margin-bottom:14px}
+  .stat .cr{
+    float:right;font:700 11.5px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;
+    color:var(--red);border:1px solid var(--red);padding:6px 10px;
+  }
+  .rule{
+    height:5px;margin:15px 0;background:var(--red);
+    clip-path:polygon(0 50%,8px 0,calc(100% - 8px) 0,100% 50%,calc(100% - 8px) 100%,8px 100%);
+  }
+  .abils{
+    display:grid;grid-template-columns:repeat(6,1fr);gap:0;
+    border:1px solid var(--line);margin:16px 0;
+  }
+  .abils div{background:#FBF1DA;padding:11px 6px;text-align:center;border-right:1px solid var(--line)}
+  .abils div:last-child{border-right:0}
+  .abils .k{font:700 10.5px/1 var(--sans);letter-spacing:.12em;color:var(--red);margin-bottom:5px}
+  .abils .v{font:15px/1 var(--serif);font-weight:600;color:var(--ink)}
+  .kv{font:14.5px/1.55 var(--sans);margin-bottom:6px;color:var(--dim)}
+  .kv b{color:var(--red2);font-weight:700}
+  .act{margin-bottom:11px;font:14.5px/1.6 var(--sans);color:var(--ink)}
+  .act .n{font-weight:700;font-style:italic;color:var(--red2)}
 
   /* ---------- cast ---------- */
-  .cast{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
-  .who{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:18px 20px}
-  .who h3{margin-bottom:3px}
-  .who .role{font-size:12px;letter-spacing:.04em;color:var(--spoken);margin-bottom:10px;font-weight:550}
-  .who p{font-size:13.5px;color:var(--dim);margin:0}
+  .cast{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px}
+  .who{background:var(--panel);border:1px solid var(--line2);padding:20px 22px}
+  .who h3{margin-bottom:4px;font-variant:small-caps;letter-spacing:.02em}
+  .who .role{
+    font:600 11.5px/1.4 var(--sans);letter-spacing:.09em;text-transform:uppercase;
+    color:var(--spoken);margin-bottom:11px;
+  }
+  .who p{font:14.5px/1.62 var(--sans);color:var(--dim);margin:0}
 
   /* ---------- drops table ---------- */
-  .drops{width:100%;border-collapse:collapse;font-size:13.5px}
+  .drops{width:100%;border-collapse:collapse;font:14px/1.55 var(--sans)}
   .drops thead th{
-    text-align:left;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--dimmer);font-weight:650;padding:0 12px 9px;border-bottom:1px solid var(--line2);
+    text-align:left;font:700 10.5px/1 var(--sans);letter-spacing:.15em;text-transform:uppercase;
+    color:var(--red);font-weight:700;padding:0 12px 10px;border-bottom:2px solid var(--red);
   }
-  .drops td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top}
-  .drops tbody tr:hover td{background:rgba(255,255,255,.015)}
-  .drops tr.done td{opacity:.4}
-  .drops .cbx{width:34px;padding-left:0}
+  .drops td{padding:13px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  .drops tbody tr:hover td{background:rgba(160,120,60,.06)}
+  .drops tr.done td{opacity:.42}
+  .drops .cbx{width:36px;padding-left:0}
   .drops input{
-    appearance:none;width:16px;height:16px;border:1px solid var(--line2);border-radius:3px;
-    background:var(--panel);cursor:pointer;position:relative;top:2px;
+    appearance:none;width:17px;height:17px;border:1px solid var(--line2);
+    background:#FDF6E4;cursor:pointer;position:relative;top:2px;
   }
-  .drops input:checked{background:var(--drop);border-color:var(--drop)}
+  .drops input:checked{background:var(--red);border-color:var(--red)}
   .drops input:checked::after{
-    content:"✓";position:absolute;inset:0;color:#0d0e10;font-size:11px;font-weight:700;
+    content:"✓";position:absolute;inset:0;color:#FBF1DA;font-size:12px;font-weight:700;
     display:flex;align-items:center;justify-content:center;
   }
   .drops .file{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;color:var(--drop)}
   .drops .ch{font-size:11.5px;color:var(--dimmer);white-space:nowrap}
-  .drops .beatname{font-weight:600}
-  .drops .how{color:var(--dim);font-size:13px}
+  .drops .beatname{font-weight:700;color:var(--ink)}
+  .drops .how{color:var(--dim);font-size:13.5px}
   .actrow td{
-    background:var(--panel2);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--dim);font-weight:650;padding:10px 12px;
+    background:var(--red);color:#F6E8CC;
+    font:700 10.5px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;
+    padding:9px 12px;
   }
   .counter{
-    display:flex;align-items:center;gap:12px;margin-bottom:16px;
-    font-size:13px;color:var(--dim);
+    display:flex;align-items:center;gap:14px;margin-bottom:18px;
+    font:13.5px/1 var(--sans);color:var(--dim);
   }
-  .counter .bar{flex:1;height:3px;background:var(--line);border-radius:2px;overflow:hidden}
-  .counter .fill{height:100%;background:var(--drop);width:0;transition:width .2s}
+  .counter .bar{flex:1;height:4px;background:var(--line);overflow:hidden}
+  .counter .fill{height:100%;background:var(--red);width:0;transition:width .2s}
   .counter button{
     appearance:none;background:var(--panel);border:1px solid var(--line2);color:var(--dim);
-    font:inherit;font-size:12px;padding:5px 11px;border-radius:4px;cursor:pointer;
+    font:600 12px/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;
+    padding:7px 12px;cursor:pointer;
   }
-  .counter button:hover{color:var(--ink);border-color:var(--dim)}
+  .counter button:hover{color:var(--red);border-color:var(--red)}
 
   /* ---------- legend ---------- */
-  .legend{display:flex;gap:22px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin-top:4px}
+  .legend{display:flex;gap:24px;flex-wrap:wrap;font:13px/1 var(--sans);color:var(--dim);margin-top:6px}
   .legend span{display:flex;align-items:center;gap:8px}
-  .swatch{width:10px;height:10px;border-radius:2px;flex:none}
+  .swatch{width:11px;height:11px;flex:none;border:1px solid rgba(0,0,0,.15)}
 
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
   @media (max-width:840px){
     .grid2{grid-template-columns:1fr}
     .abils{grid-template-columns:repeat(3,1fr)}
+    .abils div{border-bottom:1px solid var(--line)}
     .clock{flex-direction:column}
     .clock div{border-right:0;border-bottom:1px solid var(--line)}
+    h2 em{float:none;display:block;padding-top:2px}
+    .hwrap,.strip,main{padding-left:18px;padding-right:18px}
+  }
+  @media print{
+    header{position:static}
+    .tab{display:block !important}
+    body{background:#fff}
+  }
+
+  /* ---------- encounter template ---------- */
+  .sub{
+    font:700 10.5px/1 var(--sans);letter-spacing:.17em;text-transform:uppercase;
+    color:var(--red);margin:18px 0 9px;display:flex;align-items:center;gap:10px;
+  }
+  .sub::after{content:"";flex:1;height:1px;background:var(--line)}
+  .beat > .sub:first-of-type{margin-top:14px}
+  .dev{
+    margin:16px -26px -20px;padding:15px 26px;
+    background:rgba(88,24,13,.05);border-top:1px solid var(--line2);
+    font:14.5px/1.6 var(--sans);color:var(--dim);
+  }
+  .dev b{color:var(--red2);font-weight:700}
+  .dev .sub{margin:0 0 8px}
+  .ifthen{margin:0;padding:0;list-style:none}
+  .ifthen li{
+    margin-bottom:7px;padding-left:18px;position:relative;
+    font:14.5px/1.55 var(--sans);color:var(--dim);
+  }
+  .ifthen li::before{content:"\2192";position:absolute;left:0;color:var(--red2);font-weight:700}
+  .ifthen b{color:var(--ink)}
+
+  .refs{
+    display:flex;flex-wrap:wrap;gap:4px 16px;align-items:center;
+    margin:14px 0 0;padding-top:12px;border-top:1px dashed var(--line2);
+  }
+  .refs .lbl{
+    font:700 10px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--dimmer);
+  }
+
+  /* ---------- cross-tab jump chips ---------- */
+  .jump{
+    display:inline-flex;align-items:center;gap:6px;cursor:pointer;
+    background:none;border:0;border-bottom:1px solid var(--line2);
+    color:var(--red2);font:600 12.5px/1.4 var(--sans);letter-spacing:.03em;
+    padding:1px 0;margin:0 2px;
+  }
+  .jump:hover{color:var(--red);border-bottom-color:var(--red)}
+  .jump::before{content:"\29C9";font-size:12px;opacity:.7}
+  .where{
+    display:inline-flex;align-items:center;gap:7px;margin:0 0 4px;
+    font:600 11.5px/1.3 var(--sans);letter-spacing:.08em;text-transform:uppercase;
+    color:var(--dimmer);
+  }
+  .where .k{
+    background:var(--red);color:#F6E8CC;width:19px;height:19px;flex:none;
+    display:flex;align-items:center;justify-content:center;
+    font:700 11px/1 var(--sans);border-radius:2px;
+  }
+
+  /* ---------- locations gazetteer ---------- */
+  .locnote{
+    background:var(--panel2);border:1px solid var(--line2);
+    padding:16px 22px;margin-bottom:20px;font:14.5px/1.6 var(--sans);color:var(--dim);
+  }
+  .locnote b{color:var(--red2)}
+  .loc{
+    display:grid;grid-template-columns:52px 1fr;gap:0 18px;
+    border-bottom:1px solid var(--line);padding:20px 0;
+  }
+  .loc:first-of-type{border-top:1px solid var(--line)}
+  .locnum{
+    font:600 30px/1 var(--serif);color:var(--red);text-align:right;
+    padding-top:2px;
+  }
+  .loc h3{margin-bottom:3px;font-variant:small-caps;letter-spacing:.02em}
+  .locmeta{
+    font:600 11.5px/1.4 var(--sans);letter-spacing:.08em;text-transform:uppercase;
+    color:var(--dimmer);margin-bottom:10px;
+  }
+  .loc p{font:14.5px/1.62 var(--sans);color:var(--dim);margin:0 0 9px}
+  .loc p.find{color:var(--ink)}
+  .loc p.find b{color:var(--red2)}
+  .loc .none{font-style:italic;color:var(--dimmer)}
+  @media (max-width:600px){
+    .loc{grid-template-columns:34px 1fr;gap:0 12px}
+    .locnum{font-size:22px}
+    .dev{margin-left:-20px;margin-right:-20px;padding-left:20px;padding-right:20px}
   }
 </style>
 </head>
@@ -261,12 +400,13 @@
     <nav id="nav" role="tablist">
       <button role="tab" aria-selected="true" data-t="prep"><kbd>1</kbd>Prep</button>
       <button role="tab" aria-selected="false" data-t="mech"><kbd>2</kbd>Mechanics</button>
-      <button role="tab" aria-selected="false" data-t="a1"><kbd>3</kbd>Act 1</button>
-      <button role="tab" aria-selected="false" data-t="a2"><kbd>4</kbd>Act 2</button>
-      <button role="tab" aria-selected="false" data-t="a3"><kbd>5</kbd>Act 3</button>
-      <button role="tab" aria-selected="false" data-t="stats"><kbd>6</kbd>Stats</button>
-      <button role="tab" aria-selected="false" data-t="cast"><kbd>7</kbd>Cast</button>
-      <button role="tab" aria-selected="false" data-t="drops"><kbd>8</kbd>Drops</button>
+      <button role="tab" aria-selected="false" data-t="loc"><kbd>3</kbd>Locations</button>
+      <button role="tab" aria-selected="false" data-t="a1"><kbd>4</kbd>Act 1</button>
+      <button role="tab" aria-selected="false" data-t="a2"><kbd>5</kbd>Act 2</button>
+      <button role="tab" aria-selected="false" data-t="a3"><kbd>6</kbd>Act 3</button>
+      <button role="tab" aria-selected="false" data-t="stats"><kbd>7</kbd>Stats</button>
+      <button role="tab" aria-selected="false" data-t="cast"><kbd>8</kbd>Cast</button>
+      <button role="tab" aria-selected="false" data-t="drops"><kbd>9</kbd>Drops</button>
     </nav>
   </div>
   <div class="strip">
@@ -284,7 +424,7 @@
 
   <div class="card">
     <h3>Core concept</h3>
-    <p>A remote town where everyone is indoors by midnight, nine people are missing, and the dead are in the streets. The town is not hiding anything — <strong>it has a hole in it.</strong> The party will build a documented, coherent case against a dead sheriff and be wrong. The man who did it is the mayor, he is seventy-two, he is helping them, and he does not remember.</p>
+    <p class="lede">A remote town where everyone is indoors by midnight, nine people are missing, and the dead are in the streets. The town is not hiding anything — <strong>it has a hole in it.</strong> The party will build a documented, coherent case against a dead sheriff and be wrong. The man who did it is the mayor, he is seventy-two, he is helping them, and he does not remember.</p>
     <p class="note"><b>Leave the table with:</b> the worst thing in this story was done out of love, and nobody involved is a villain.</p>
   </div>
 
@@ -330,11 +470,11 @@
   <div class="card">
     <h3>Colour key</h3>
     <div class="legend">
-      <span><i class="swatch" style="background:#d9a256"></i> Spoken — read aloud or say verbatim</span>
-      <span><i class="swatch" style="background:#7fa8bd"></i> Posted — an image drop</span>
-      <span><i class="swatch" style="background:#c2564b"></i> Never — hard don't</span>
+      <span><i class="swatch" style="background:var(--spoken)"></i> Spoken — read aloud or say verbatim</span>
+      <span><i class="swatch" style="background:var(--drop)"></i> Posted — an image drop</span>
+      <span><i class="swatch" style="background:var(--never)"></i> Never — hard don't</span>
     </div>
-    <p class="note">Tabs switch with keys <b>1–8</b>. Drop checkboxes reset if you reload the page.</p>
+    <p class="note">Tabs switch with keys <b>1–9</b>. Blue <b>Reference</b> chips jump to the appendix and highlight what you came for. Drop checkboxes reset if you reload the page.</p>
   </div>
 </section>
 
@@ -342,7 +482,7 @@
 <section class="tab" id="mech">
   <h2>The central mechanics <em>six systems</em></h2>
 
-  <details class="mech" open>
+  <details class="mech" id="m-hole" open>
     <summary><span class="num">1</span> The Hole — passive memory drain, all session</summary>
     <div class="body">
       <p>Everyone in Halloway is being eaten slowly, including the party from the moment they drink anything.</p>
@@ -355,7 +495,7 @@
     </div>
   </details>
 
-  <details class="mech">
+  <details class="mech" id="m-curse">
     <summary><span class="num">2</span> Cassandra's Curse — the aphasia mechanic</summary>
     <div class="body">
       <p>Halloway residents <em>want</em> to warn them and cannot. Any time an NPC tries to explain the curfew, the walkers, or the disappearances:</p>
@@ -372,7 +512,7 @@
     </div>
   </details>
 
-  <details class="mech">
+  <details class="mech" id="m-log">
     <summary><span class="num">3</span> Hedy's Log — the continuity check</summary>
     <div class="body">
       <p>Hedy's organic memory drains like everyone else's. His systems do not.</p>
@@ -386,7 +526,7 @@
     </div>
   </details>
 
-  <details class="mech">
+  <details class="mech" id="m-midnight">
     <summary><span class="num">4</span> Midnight — the curfew</summary>
     <div class="body">
       <div class="clock">
@@ -399,7 +539,7 @@
     </div>
   </details>
 
-  <details class="mech">
+  <details class="mech" id="m-call">
     <summary><span class="num">5</span> The Call — DC 15 Wis</summary>
     <div class="body">
       <p>When a walker fixes on a creature it says a name — a real one, taken from that creature's own memory. It says it warmly.</p>
@@ -413,7 +553,7 @@
     </div>
   </details>
 
-  <details class="mech">
+  <details class="mech" id="m-records">
     <summary><span class="num">6</span> The Records — why paper wins</summary>
     <div class="body">
       <p>Anything written down is immune to all of the above. Files, flyers, photographs, the case file, the #evidence channel, and anything a PC writes in their own notes.</p>
@@ -422,13 +562,201 @@
   </details>
 </section>
 
+<!-- ============ LOCATIONS ============ -->
+<section class="tab" id="loc">
+  <h2>Halloway, keyed <em>sixteen locations</em></h2>
+
+  <div class="locnote">
+    <b>This tab owns places. The act tabs own sequence.</b> Nothing is duplicated — a location entry tells you what is
+    physically there and what can be found there, then hands you off to the beat where it plays. If the party goes
+    somewhere out of order, start here and jump. Map letters match the Dungeon Alchemist build spec:
+    <b>A</b> the reservoir, <b>B</b> Main Street, <b>C</b> the residential block.
+  </div>
+
+  <div class="loc"><div class="locnum">1</div><div>
+    <h3>Deer View Diner</h3>
+    <div class="locmeta">Main Street · Map B · open, still serving</div>
+    <p>Warm, busy, unremarkable, good pie. Eight missing-persons flyers taped inside the front window in three
+      distinct generations of sun-bleaching. Laura Ardley worked here and the uniform in Act 2 is this uniform —
+      her name is embroidered on the chest.</p>
+    <p class="find"><b>Findable here:</b> the flyer sheet. The waitress's ghost story, offered cheerfully, with no
+      names and no date attached — and her genuine confusion that she has none. First crack in the town.</p>
+    <p><b>They drink the coffee.</b> Say nothing.</p>
+    <button class="jump" data-goto="a1#b-town">Act 1 · The town, before dark</button>
+  </div></div>
+
+  <div class="loc"><div class="locnum">2</div><div>
+    <h3>Hardware store</h3>
+    <div class="locmeta">Main Street · Map B · dressing only</div>
+    <p>Two men talking out front, a dog asleep in the shade of the awning. This is the shot that proves Halloway is
+      pleasant, and it is the whole reason the flyers land.</p>
+    <p class="none">Nothing is hidden here. Do not put anything here.</p>
+    <button class="jump" data-goto="a1#b-town">Act 1 · The town, before dark</button>
+  </div></div>
+
+  <div class="loc"><div class="locnum">3</div><div>
+    <h3>The bank</h3>
+    <div class="locmeta">Main Street · Map B · time-and-temperature sign</div>
+    <p>The sign runs four minutes fast. So does the diner clock, and the motel office clock, and every other clock
+      in town. Nobody has corrected them because nobody in Halloway wants to be the one who is late.</p>
+    <p class="find"><b>Findable here:</b> the clock discrepancy — Scipio's catch. Ask about it and one person gets
+      oddly defensive.</p>
+    <button class="jump" data-goto="a1#b-town">Act 1 · The town, before dark</button>
+  </div></div>
+
+  <div class="loc"><div class="locnum">4</div><div>
+    <h3>Sheriff's Office</h3>
+    <div class="locmeta">2 Bell Row · Map B · records basement</div>
+    <p>Small, fluorescent, understaffed. Sheriff Ruth Mackey works out of a cramped office with a filing cabinet
+      behind her. Emmet Crale's original 352 file is in the basement and it is <b>intact</b> — paper doesn't forget.</p>
+    <p class="find"><b>Findable here:</b> the case file, including the margin line. Mackey resists on territoriality,
+      not conspiracy, and relents on Persuasion DC 13 or simply on Scipio being a cop at her. <b>Do not make this a wall.</b></p>
+    <button class="jump" data-goto="a2#b-records">Act 2 · The records room</button>
+  </div></div>
+
+  <div class="loc"><div class="locnum">5</div><div>
+    <h3>Municipal Building</h3>
+    <div class="locmeta">Main Street · Map B · the mayor's office</div>
+    <p>Wood panelling, a window with afternoon light, the town newsletter on a side table beside an unopened water
+      bill. Mayor Daniel Crale meets the party here himself and opens every door in town for them.</p>
+    <p class="find"><b>Findable here:</b> the newsletter. And later, over a drink, the false confession —
+      <em>I've always thought my father killed those two kids.</em></p>
+    <button class="jump" data-goto="a1#b-town">Act 1 · The town</button>
+    <button class="jump" data-goto="a2#b-mayor">Act 2 · The mayor</button>
+  </div></div>
+
+  <div class="loc"><div class="locnum">6</div><div>
+    <h3>The motel</h3>
+    <div class="locmeta">Main Street, east end · Map B · the party's base</div>
+    <p>Twelve units, an office with a bell, a vending machine. <b>The exterior doors lock at eleven</b> and the
+      night clerk goes home — not hostile, just done. Anyone outside after that is outside.</p>
+    <p class="find"><b>Findable here:</b> the curfew, enforced on them personally for the first time. This is where
+      Act 1 turns from quaint to strict.</p>
+    <button class="jump" data-goto="a1#b-eleven">Act 1 · Eleven o'clock</button>
+  </div></div>
+
+  <div class="loc"><div class="locnum">7</div><div>
+    <h3>Cassandra Ardley's house</h3>
+    <div class="locmeta">Corliss St · Map C · she will let them in</div>
+    <p>A kitchen with an oilcloth table, a warm lamp, reading glasses, and a shoebox of photographs already
+      half laid out. Seventy-five years old, fifty of them spent away from this water, and the only clear head in town.</p>
+    <p class="find"><b>Findable here:</b> the Year 352 school photograph and her note. Laura as an actual person.
+      The bullying. The reservoir incident. She has been telling people for five years and will be openly surprised
+      when somebody writes it down.</p>
+    <button class="jump" data-goto="a2#b-cassandra">Act 2 · Cassandra Ardley</button>
+  </div></div>
+
+  <div class="loc"><div class="locnum">8</div><div>
+    <h3>Emmet Crale's house</h3>
+    <div class="locmeta">Pike St · Map C · empty sixty years, kept up</div>
+    <p>Danny has paid someone to maintain it since his father went into care and has not lived in it. Bare
+      floorboards, dust everywhere except one place. Under a loose board, a cigar box.</p>
+    <p class="find"><b>Findable here:</b> the knife — undersized, a boy's, initials <b>D.C.</b> scratched by an
+      unsteady hand, blade cleaned thoroughly a very long time ago.</p>
+    <div class="never">Let them in before the wound angle is on the table. The initials hand them the answer before
+      they have earned it. He's out of town until tomorrow, or the key is at the hospice.</div>
+    <button class="jump" data-goto="a3#b-knife">Act 3 · Gate the knife</button>
+  </div></div>
+
+  <div class="loc"><div class="locnum">9</div><div>
+    <h3>The Dunn house</h3>
+    <div class="locmeta">Fenn St · Map C · two storey, all curtains drawn</div>
+    <p>Everett and Maeve Dunn are on the flyer sheet. They are also standing in the street outside their own house
+      every night, patiently, waiting for a door to open.</p>
+    <p class="find"><b>Findable here:</b> the disappearances made real. And, after the party has the names, a
+      parted curtain in one upstairs window with somebody standing in the gap.</p>
+    <p><b>That is their daughter.</b> She has been doing it every night since March. Describe everything except
+      the window.</p>
+    <button class="jump" data-goto="a2#b-laura">Act 2 · Laura, on the road</button>
+  </div></div>
+
+  <div class="loc"><div class="locnum">10</div><div>
+    <h3>The delivery van</h3>
+    <div class="locmeta">Corliss St, half on the gravel shoulder · Map C</div>
+    <p>Northwind Delivery. Parked at a careless angle exactly where it stopped three weeks ago, driver's door
+      hanging open, packages still visible inside. Leaves in the wipers, dust film, a spider web between the mirror
+      and the body. <b>Nobody has moved it. Nobody mentions it.</b></p>
+    <p class="find"><b>Findable here:</b> the keys, still in it. <b>The battery is flat.</b> Ford or Hedy solves that
+      in a round or two — while the party stands on a dark street at 12:40.</p>
+    <button class="jump" data-goto="a1#b-town">Act 1 · dressing</button>
+    <button class="jump" data-goto="a3#b-drive">Act 3 · The drive</button>
+  </div></div>
+
+  <div class="loc"><div class="locnum">11</div><div>
+    <h3>Church &amp; steeple</h3>
+    <div class="locmeta">Bell Row · Map B · skyline only</div>
+    <p>Visible from the reservoir bank on arrival and in frame in the establishing shot. That is its entire job.</p>
+    <p class="none">Nothing happens here. If the party investigates it, nothing is wrong, and let that be
+      genuinely unsatisfying.</p>
+  </div></div>
+
+  <div class="loc"><div class="locnum">12</div><div>
+    <h3>Water tower</h3>
+    <div class="locmeta">North of Main · Map B · in frame on arrival</div>
+    <p>Fed from the reservoir. Every tap in Halloway runs from here, which means every cup of coffee, every glass
+      of water, and everything the party has drunk since they arrived.</p>
+    <div class="never">Point at this. Flag it, put it in frame, never mention it again. Hedy's log discrepancies are
+      what should lead them back to intake — not you.</div>
+    <button class="jump" data-goto="a2#b-hedylog">Act 2 · Hedy's log</button>
+  </div></div>
+
+  <div class="loc"><div class="locnum">13</div><div>
+    <h3>Old schoolhouse</h3>
+    <div class="locmeta">Reservoir Road, town edge · no map needed</div>
+    <p>Closed decades ago, still standing. This is the building in the Year 352 group photograph — the wooden
+      risers were set up outside that door.</p>
+    <p class="find"><b>Findable here:</b> corroboration only, and only if they bring the photograph. Laura laughing
+      at center-left. Wes with his arm around a friend. A much smaller boy at the frame edge, looking straight at
+      the lens while everyone else looks away.</p>
+    <button class="jump" data-goto="a2#b-cassandra">Act 2 · the photograph</button>
+  </div></div>
+
+  <div class="loc"><div class="locnum">14</div><div>
+    <h3>The quarry</h3>
+    <div class="locmeta">South-east, disused · no map needed</div>
+    <p>Flooded, fenced, forty years out of use. Searched by volunteers in Year 352 and it came up negative,
+      which is recorded in the case file.</p>
+    <p class="none">A dead end, and a useful one — it is the obvious place to look and it is where the original
+      search wasted its second day. Let them rule it out.</p>
+    <button class="jump" data-goto="a2#b-records">Act 2 · the case file</button>
+  </div></div>
+
+  <div class="loc"><div class="locnum">15</div><div>
+    <h3>The dam &amp; service road</h3>
+    <div class="locmeta">Reservoir · Map A · build this one properly</div>
+    <p>Earth bank, a gravel service road running down along the water and out of sight, a wadeable margin, elevation
+      for ranged characters to claim, and treeline entry points for up to six walkers. <b>The party arrives here</b>
+      through the aperture and lands on the answer in the first thirty seconds.</p>
+    <p class="find"><b>Findable here:</b> two sets of remains sixty years down, and a knife. Reachable — they have
+      rope, spells, a Ranger, and a service road. Later, the thing itself.</p>
+    <div class="never">Let the Coin react on arrival, or linger. It is scenery for two days.</div>
+    <button class="jump" data-goto="a1#b-arrival">Act 1 · Arrival</button>
+    <button class="jump" data-goto="a3#b-remains">Act 3 · The remains</button>
+    <button class="jump" data-goto="a3#b-thing">Act 3 · The thing comes up</button>
+  </div></div>
+
+  <div class="loc"><div class="locnum">16</div><div>
+    <h3>Reservoir Road</h3>
+    <div class="locmeta">Reservoir to town, then County Rd to Cedarline · no map</div>
+    <p>Two-lane blacktop, gravel shoulders, telephone poles, split-rail fence, treeline both sides. The road Laura
+      died on is the road into town — the party drives it on arrival without knowing that.</p>
+    <p class="find"><b>Findable here:</b> Laura, walking home from a shift, sixty years running. The courier at the
+      ten-mile mark, standing beside his own vehicle's tracks. Figures at intervals on the way to Cedarline.</p>
+    <div class="never">Put this stretch on a battle map. Tokens on a grid read as an encounter, the table rolls
+      initiative, and driving past stops being something anyone considers.</div>
+    <button class="jump" data-goto="a2#b-laura">Act 2 · Laura, on the road</button>
+    <button class="jump" data-goto="a3#b-drive">Act 3 · The drive</button>
+  </div></div>
+</section>
+
 <!-- ============ ACT 1 ============ -->
 <section class="tab" id="a1">
   <h2>Act 1 — Halloway <em>~40 min</em></h2>
 
-  <div class="beat">
+  <div class="beat" id="b-briefing">
     <h3>The briefing <span class="time">10 min · at the Lantern</span></h3>
-    <p>Ezriel has two call sheets off <strong>Unclassified Incident Intake</strong> — the crank extension at Meridian PD that routes to Observation. Six weeks apart, nobody connected them but him.</p>
+    <div class="where"><button class="jump" data-goto="loc">The Lantern — off-map</button></div>
+    <p class="lede">Ezriel has two call sheets off <strong>Unclassified Incident Intake</strong> — the crank extension at Meridian PD that routes to Observation. Six weeks apart, nobody connected them but him.</p>
     <ul>
       <li><strong>Mayor Daniel Crale, Halloway.</strong> Nine missing in eighteen months. No county file. Worked up the chain until somebody handed him a number to get rid of him.</li>
       <li><strong>A night nurse at Cedarline Care.</strong> A ninety-five-year-old resident who says the same three things at four in the morning.</li>
@@ -436,18 +764,24 @@
     <span class="drop">callsheet-A + callsheet-B <span class="ch">#evidence · one message, no caption</span></span>
     <p class="note">Ezriel has nothing else. No Lantern file on Halloway, no compass reading. <b>Have him say so.</b></p>
     <p class="note"><b>Scipio's beat.</b> He knows that extension. Twenty-two years on the force and he has transferred people to it — cranks, ghost calls, the woman who phones every winter about the noise in her walls. Let him work out that he's been feeding the Lantern for two decades. One line, in voice. Don't let the table dwell.</p>
+  
+    <div class="dev"><div class="sub">Development</div><p>They take it. There is no Lantern file on Halloway and no compass reading, and the aperture is scheduled for two days.</p><ul class="ifthen"><li><b>If they press Ezriel for more</b> — he has nothing, and he says so plainly. That is the point.</li><li><b>If Scipio's player doesn't bite on the extension</b> — let it go. The pink sheet comes back in Act 3 and lands harder.</li></ul></div>
   </div>
 
-  <div class="beat">
+  <div class="beat" id="b-arrival">
     <h3>Arrival</h3>
+    <div class="where"><span class="k">15</span><button class="jump" data-goto="loc">The dam &amp; service road</button></div>
     <span class="drop">reservoir <span class="ch">#play</span></span>
     <div class="say">Late sun on open water. A gravel service road runs down along the bank and out of sight, and past the treeline the town sits in the low ground — a grid of roofs, a water tower, one steeple. It is very quiet in the way that open country is quiet. Behind you the air closes with a sound like a held breath letting go, and that's your way home gone until Thursday.</div>
     <div class="never">Flag the reservoir. They have landed on the answer. It is scenery for two days. Do not let the Coin react.</div>
     <p class="note"><b>They are stranded.</b> Return transit is scheduled, not summoned — two days. No vehicle. The road out is too long to walk at night.</p>
+  
+    <div class="dev"><div class="sub">Development</div><p>The aperture closes behind them. They are stranded until Thursday, on foot, with the town in the low ground ahead.</p><ul class="ifthen"><li><b>If they search the reservoir now</b> — flat water, nothing. They have landed on the answer and it is scenery for two days.</li><li><b>If they ask about the water tower</b> — it is a water tower.</li></ul></div>
   </div>
 
-  <div class="beat">
+  <div class="beat" id="b-town">
     <h3>The town, before dark</h3>
+    <div class="where"><span class="k">1</span><span class="k">2</span><span class="k">3</span><span class="k">5</span><span class="k">10</span><button class="jump" data-goto="loc">Main Street</button></div>
     <p>Mayor Crale meets them himself — warm, grateful, apologetic about the drive, opens every door in town. He is the reason they were called. <strong>Play him completely straight.</strong></p>
     <span class="drop">town-day <span class="ch">#play</span></span>
     <span class="drop">flyers <span class="ch">#evidence · back to back, nothing said between</span></span>
@@ -464,17 +798,25 @@
     </ul>
     <span class="drop">newsletter <span class="ch">#evidence · dressing</span></span>
     <span class="drop">van <span class="ch">#play · dressing</span></span>
+  
+    <div class="refs"><span class="lbl">Reference</span><button class="jump" data-goto="mech#m-curse">Cassandra's Curse</button></div>
+    <div class="dev"><div class="sub">Development</div><p>Crale opens every door in town. They have until eleven, and they don't know that yet.</p><ul class="ifthen"><li><b>If they never go into the diner</b> — Mackey has flyer copies, so does the mayor, so does the noticeboard. Drop them wherever they first sit down with an official.</li><li><b>If they ask a resident about the curfew</b> — run Cassandra's Curse. First instance plays as distraction; let them miss it.</li><li><b>If Act 1 is running long</b> — cut the newsletter and the courier. Everything else here is load-bearing.</li></ul></div>
   </div>
 
-  <div class="beat">
+  <div class="beat" id="b-eleven">
     <h3>Eleven o'clock</h3>
+    <div class="where"><span class="k">6</span><button class="jump" data-goto="loc">The motel</button></div>
     <p>The town empties fast and practiced. Porch lights go off. Curtains close.</p>
     <span class="drop">eleven-forty <span class="ch">#play</span></span>
     <div class="say">Eleven-forty. The street is dry and empty and the streetlights are still on, which somehow makes it worse — a lit street with nothing on it. Every window on the block is dark. Not curtained. Dark. Somewhere behind you a deadbolt turns, and then another one further down, and then the whole street sounds like a lock.</div>
+  
+    <div class="refs"><span class="lbl">Reference</span><button class="jump" data-goto="mech#m-midnight">Midnight — the curfew</button></div>
+    <div class="dev"><div class="sub">Development</div><p>The street empties in about four minutes, practiced. The motel's exterior doors lock and the clerk goes home.</p><ul class="ifthen"><li><b>If somebody stays out</b> — the collection comes for them. Bilf will stay out. Let him.</li><li><b>If everyone goes inside</b> — they hear the screen door and the voice through the wall, and Act 1 still lands.</li></ul></div>
   </div>
 
-  <div class="beat">
+  <div class="beat" id="b-collection">
     <h3>Midnight — the collection</h3>
+    <div class="where"><span class="k">6</span><button class="jump" data-goto="loc">The motel street</button></div>
     <span class="drop">first-sighting <span class="ch">#play · before they know what it is</span></span>
     <span class="drop">collection <span class="ch">#play · run the challenge over this</span></span>
     <p><strong>Skill challenge first.</strong> A neighbour comes out to walk them in. Then a second. Then six, then a deputy. Nobody raises their voice.</p>
@@ -485,6 +827,9 @@
       <li><strong>If they escalate to combat, let them.</strong> Commoner stat blocks. They don't fight back well. They keep apologising.</li>
     </ul>
     <p class="note">Nobody here is an antagonist. They are terrified people improvising a rule that is eighteen months old, and they cannot say why.</p>
+  
+    <div class="refs"><span class="lbl">Reference</span><button class="jump" data-goto="mech#m-call">The Call · DC 15 Wis</button><button class="jump" data-goto="mech#m-midnight">Midnight</button></div>
+    <div class="dev"><div class="sub">Development</div><p>They get walked back, without violence. Then the screen door, the voice saying a name nobody knows, and cut.</p><ul class="ifthen"><li><b>If they escalate to combat</b> — commoner blocks. They don't fight back well and they keep apologising.</li><li><b>If they clear the challenge</b> — fragments only: a name, eighteen months, Mrs. someone who went out. All of it interrupted by the Curse.</li><li><b>Do not investigate the voice tonight.</b> No follow-up, no roll. End the act on nothing.</li></ul></div>
   </div>
 
   <div class="beat">
@@ -498,18 +843,23 @@
 <section class="tab" id="a2">
   <h2>Act 2 — The Hour <em>~60 min</em></h2>
 
-  <div class="beat">
+  <div class="beat" id="b-cassandra">
     <h3>Cassandra Ardley</h3>
-    <p>Seventy-five. Left Halloway at nineteen, came back at seventy. Fifty years off that water — <strong>the only person in town who can say Laura Ardley and mean a person.</strong></p>
+    <div class="where"><span class="k">7</span><button class="jump" data-goto="loc">Cassandra Ardley's house</button></div>
+    <p class="lede">Seventy-five. Left Halloway at nineteen, came back at seventy. Fifty years off that water — <strong>the only person in town who can say Laura Ardley and mean a person.</strong></p>
     <p>She gives them: her sister as a human being, the bullying, the reservoir incident, and the fact that she has been telling people this for five years and they nod and forget. She has stopped expecting to be believed and will be openly surprised when the party writes it down.</p>
     <span class="drop">cassandra <span class="ch">#play · before she speaks</span></span>
     <span class="drop">schoolphoto <span class="ch">#evidence · then the note, italic, separately</span></span>
     <div class="line">"Laura, spring before. The other one is Wes Harrow. I don't know who the little boy is. — C.A."</div>
     <p class="note">She genuinely does not know. She was fifteen and she left at nineteen. <b>Show it to the mayor and he will not recognise himself.</b></p>
+  
+    <div class="refs"><span class="lbl">Reference</span><button class="jump" data-goto="cast#c-cassandra">Cassandra — cues</button><button class="jump" data-goto="mech#m-curse">Cassandra's Curse</button></div>
+    <div class="dev"><div class="sub">Development</div><p>They leave with Laura as an actual person, the photograph, and the first account that has facts in it.</p><ul class="ifthen"><li><b>If they skip her entirely</b> — nobody in town can say Laura's name and the photograph never surfaces. Legitimate, and harder. Have her approach them instead; she has been waiting five years for somebody to ask.</li><li><b>If they write her sentences down</b> — reward it heavily. This is the session's thesis arriving early.</li></ul></div>
   </div>
 
-  <div class="beat">
+  <div class="beat" id="b-records">
     <h3>The records room</h3>
+    <div class="where"><span class="k">4</span><button class="jump" data-goto="loc">Sheriff's Office, 2 Bell Row</button></div>
     <p>Emmet Crale's original file is in the sheriff's basement and it is <strong>intact</strong> — paper doesn't forget.</p>
     <ul>
       <li><strong>Sheriff Ruth Mackey</strong> resists. Not conspiracy — territoriality. Nine people down, nothing to show, and the sixty-year-old file is the only strange thing she has.</li>
@@ -518,10 +868,14 @@
     <span class="drop">mackey <span class="ch">#play</span></span>
     <span class="drop">casefile <span class="ch">#evidence · no caption, ever</span></span>
     <div class="never">Mention the margin. If nobody reads the bottom of the page, that is a legitimate outcome and it comes back in Act 3.</div>
+  
+    <div class="refs"><span class="lbl">Reference</span><button class="jump" data-goto="cast#c-mackey">Mackey — cues</button><button class="jump" data-goto="mech#m-records">The Records</button></div>
+    <div class="dev"><div class="sub">Development</div><p>The false case assembles itself out of real documents, and it points at a dead man.</p><ul class="ifthen"><li><b>If nobody reads the margin</b> — fine. In Act 3, re-post the case file alongside the pink sheet, no caption, and let the handwriting do it.</li><li><b>If they lean on Mackey</b> — she folds fast. She is not the obstacle; she is the one person still trying.</li></ul></div>
   </div>
 
-  <div class="beat">
+  <div class="beat" id="b-falsecase">
     <h3>The false case — let it feel great</h3>
+    <div class="where"><span class="k">4</span><button class="jump" data-goto="loc">Sheriff's Office</button></div>
     <p>Coherent, documented, and wrong:</p>
     <ul>
       <li>Emmet had picked Wes Harrow up twice. Everyone knew he couldn't stand the kid.</li>
@@ -530,18 +884,25 @@
       <li>There is a quiet local legend that the old sheriff did it.</li>
     </ul>
     <p class="note"><b>Do not undercut this.</b> The party should leave Act 2 pleased with themselves. That is what makes the flip land.</p>
+  
+    <div class="dev"><div class="sub">Development</div><p>They should leave this scene pleased with themselves. That is what makes the flip land.</p><ul class="ifthen"><li><b>Do not undercut it.</b> No hedging, no ominous music, no tell. Let the wrong answer be a good answer.</li></ul></div>
   </div>
 
-  <div class="beat">
+  <div class="beat" id="b-mayor">
     <h3>The mayor</h3>
+    <div class="where"><span class="k">5</span><button class="jump" data-goto="loc">Municipal Building</button></div>
     <p>Over a drink, reluctantly, because they asked and he is tired of carrying it:</p>
     <div class="line">"I've always thought my father killed those two kids."</div>
     <p>Give him the entire scene. He is credible by every measure available to the table. <strong>No tell, no hesitation, no wrong detail.</strong> He believes it completely; it is the one fragment the thing left him.</p>
     <div class="never">Re-post his portrait. It's pinned. Let them scroll up to it if they want a face.</div>
+  
+    <div class="refs"><span class="lbl">Reference</span><button class="jump" data-goto="cast#c-mayor">Crale — cues</button></div>
+    <div class="dev"><div class="sub">Development</div><p>He is credible by every measure available to the table, because he believes it completely.</p><ul class="ifthen"><li><b>If they check his story against the file</b> — it holds. Everything he says is true except who did it.</li><li><b>If they show him the school photograph</b> — he does not recognise himself.</li></ul></div>
   </div>
 
-  <div class="beat">
+  <div class="beat" id="b-laura">
     <h3>Laura, on the road</h3>
+    <div class="where"><span class="k">16</span><span class="k">9</span><button class="jump" data-goto="loc">Reservoir Road · the Dunn house</button></div>
     <span class="drop">laura <span class="ch">#play · post, then let her speak</span></span>
     <div class="say">A girl in a work uniform, walking. Not drifting, not floating — walking, the way you walk the last stretch home when your feet hurt. She sees you and slows down and looks a little relieved, like she was hoping to run into somebody.</div>
     <p>Warm, confused, pleased to have company. She does not know she is dead. She asks whether they've seen Wes.</p>
@@ -553,12 +914,19 @@
     <span class="drop">dunns-curtain <span class="ch">#play · after they have the names</span></span>
     <span class="drop">courier <span class="ch">#play · if they work the van</span></span>
     <p class="note"><b>The curtain image:</b> describe everything except the upstairs window. That's the daughter. She's been doing it every night since March.</p>
+  
+    <div class="refs"><span class="lbl">Reference</span><button class="jump" data-goto="cast#c-laura">Laura — cues</button><button class="jump" data-goto="stats#s-walker">Walker — stat block</button><button class="jump" data-goto="mech#m-call">The Call</button></div>
+    <div class="dev"><div class="sub">Development</div><p>She describes her killer perfectly: a twelve-year-old boy. Deliver it flat and move on.</p><ul class="ifthen"><li><b>If they push for other walkers</b> — Wes, at eighty feet, never resolving. If a player wants closer, he is simply further away.</li><li><b>If they attack her</b> — let it work, and let it be the worst thing they do all night.</li><li><b>If they ask her about Wes</b> — she asks whether they've seen him.</li></ul></div>
   </div>
 
-  <div class="beat">
+  <div class="beat" id="b-hedylog">
     <h3>Hedy's log — the discovery</h3>
+    <div class="where"><span class="k">12</span><button class="jump" data-goto="loc">Water tower — the tap</button></div>
     <p>When his log and the table disagree, that's the moment. <strong>DM only.</strong> Do not explain it. Following the discrepancies backward points at the tap.</p>
     <p class="note">Play the recent dead as word-perfect and the sixty-year-old walkers as slightly generic. Laura's laugh isn't quite the one anyone remembers.</p>
+  
+    <div class="refs"><span class="lbl">Reference</span><button class="jump" data-goto="mech#m-log">Hedy's Log</button><button class="jump" data-goto="mech#m-hole">The Hole</button></div>
+    <div class="dev"><div class="sub">Development</div><p>Following the discrepancies backward points at intake. Everything they have consumed in Halloway came out of a tap.</p><ul class="ifthen"><li><b>If Hedy's player says nothing out loud</b> — that decision <em>is</em> the mechanic. The log diverges again next act.</li><li><b>Never explain it.</b> Let his player be the one who says <em>that's not what happened.</em></li></ul></div>
   </div>
 </section>
 
@@ -566,9 +934,10 @@
 <section class="tab" id="a3">
   <h2>Act 3 — The Reservoir and the Road <em>~45 min</em></h2>
 
-  <div class="beat">
+  <div class="beat" id="b-remains">
     <h3>The remains</h3>
-    <p>Two sets, sixty years down, and a knife. Reachable — the party has rope, spells, a Ranger, and a reservoir with a service road.</p>
+    <div class="where"><span class="k">15</span><button class="jump" data-goto="loc">The dam &amp; service road</button></div>
+    <p class="lede">Two sets, sixty years down, and a knife. Reachable — the party has rope, spells, a Ranger, and a reservoir with a service road.</p>
     <span class="drop">coroner-laura + coroner-wes <span class="ch">#evidence · one message, no caption</span></span>
     <p><strong>The flip: the wound track on Laura is angled upward, 22–28°.</strong> Someone shorter. Someone much shorter.</p>
     <ul>
@@ -577,18 +946,25 @@
     </ul>
     <div class="never">Do the arithmetic for them.</div>
     <span class="drop">danny-12 <span class="ch">#play · optional, only after the flip</span></span>
+  
+    <div class="refs"><span class="lbl">Reference</span><button class="jump" data-goto="cast#c-accounts">The Two Accounts</button></div>
+    <div class="dev"><div class="sub">Development</div><p>The wound angle flips the case from a dead sheriff to somebody 140–150 cm tall.</p><ul class="ifthen"><li><b>If they don't do the arithmetic</b> — the knife's initials will do it for them, but weaker. Try the coroner's sheets side by side first.</li><li><b>If they miss the checkbox difference</b> — leave it. It returns when they understand there are two accounts and no reconciling them.</li></ul></div>
   </div>
 
-  <div class="beat">
+  <div class="beat" id="b-knife">
     <h3>Gate the knife</h3>
+    <div class="where"><span class="k">8</span><button class="jump" data-goto="loc">Emmet Crale's house</button></div>
     <p>Danny will happily let them search his father's house — which means the initials <strong>D.C.</strong> can hand them the answer before they've earned it.</p>
     <p>Keep them out until the remains are up and the wound angle is on the table: he's out of town until tomorrow, or the key is at the hospice.</p>
     <p class="note"><b>Order that works:</b> remains → coroner's sheets → the arithmetic → the house. The knife confirms what they already worked out.</p>
     <span class="drop">knife <span class="ch">#evidence · after the sheets only</span></span>
+  
+    <div class="dev"><div class="sub">Development</div><p>Confirmation of something they already worked out — which is the only way it should ever arrive.</p><ul class="ifthen"><li><b>Order that works</b> — remains, then coroner's sheets, then the arithmetic, then the house.</li></ul></div>
   </div>
 
-  <div class="beat">
+  <div class="beat" id="b-drive">
     <h3>The drive</h3>
+    <div class="where"><span class="k">10</span><span class="k">16</span><button class="jump" data-goto="loc">The van · Reservoir Road</button></div>
     <p>Cedarline is an hour out on a bad road, at night, and they have no vehicle. <strong>The delivery van has been sitting three weeks and the keys are in it.</strong> The driver is on the road with the rest of them.</p>
     <span class="drop">van <span class="ch">#play · re-post the Act 1 file</span></span>
     <p class="note"><b>The battery is flat.</b> It cranks and doesn't catch. Now they're standing on a dark street at 12:40 while somebody pops the hood. Ford or Hedy solves it in a round or two.</p>
@@ -600,11 +976,15 @@
       <li>Anyone in the vehicle can be Called through glass. The counter is not looking.</li>
       <li>If someone stops, 2–4 <strong>Walkers</strong>. If nobody stops, nobody fights anything — and that should be an available outcome.</li>
     </ul>
-    <div class="never">Roll anything when you post the road. Ask what they do. The right lane is open.</div>
+    <div class="never">Roll anything when you post the road, and do not put this stretch on a battle map. Tokens on a grid read as an encounter — the table rolls initiative and driving past stops being something anyone considers. Post it, ask what they do. The right lane is open.</div>
+  
+    <div class="refs"><span class="lbl">Reference</span><button class="jump" data-goto="stats#s-walker">Walker — stat block</button><button class="jump" data-goto="mech#m-call">The Call</button></div>
+    <div class="dev"><div class="sub">Development</div><p>They reach Cedarline, or they don't, and both are real outcomes.</p><ul class="ifthen"><li><b>If nobody stops</b> — nobody fights anything. No encounter, no cost. The image did its work.</li><li><b>If someone stops</b> — 2–4 Walkers. The middle figure is the courier.</li><li><b>If they have no vehicle at all</b> — the road is too long to walk before dawn. Cedarline waits until tomorrow and the thing gets another night.</li></ul></div>
   </div>
 
-  <div class="beat">
+  <div class="beat" id="b-hospice">
     <h3>The hospice window</h3>
+    <div class="where"><button class="jump" data-goto="loc">Cedarline Care — an hour out</button></div>
     <span class="drop">corridor <span class="ch">#play · stage Laura in it</span></span>
     <p>One lit door at the end of a dark hall. <strong>Laura is somewhere between them and the lamp.</strong> She's warm, she's confused, she doesn't know what she's doing, and she asks them — reasonably, kindly — not to go in and wake him.</p>
     <span class="drop">emmet <span class="ch">#play</span></span>
@@ -617,12 +997,17 @@
     <span class="drop">callsheet-B <span class="ch">#evidence · re-post, no message</span></span>
     <div class="line">"I said not him."</div>
     <p class="note">They've had that sheet since minute five. Let somebody find it.</p>
+  
+    <div class="refs"><span class="lbl">Reference</span><button class="jump" data-goto="cast#c-emmet">Emmet — cues</button></div>
+    <div class="dev"><div class="sub">Development</div><p>Confirmation, not confession. He is not defending himself; he is comforting his son.</p><ul class="ifthen"><li><b>If they push him hard</b> — he gets frightened and stops making sense. Gentle gets the terms out loud.</li><li><b>If they bring the pink sheet</b> — <em>I said not him.</em> They have had it since minute five.</li></ul></div>
   </div>
 
-  <div class="beat">
+  <div class="beat" id="b-thing">
     <h3>The thing comes up</h3>
+    <div class="where"><span class="k">15</span><button class="jump" data-goto="loc">The dam &amp; service road</button></div>
     <p>Only when the hole starts closing — the truth said out loud, the remains recovered, or Emmet's window opening. Run it at the reservoir; the water is where it has to be fought.</p>
     <span class="drop">the-thing <span class="ch">#play · post once, never again</span></span>
+    <p class="note"><b>Decide this before you run it.</b> "Post once" and a D&amp;D Beyond avatar cannot both be true — an avatar sits in the initiative tracker for the whole fight and any player can open it and stare. Either give it a plain token and no avatar art, keeping this drop as its only appearance, or set the avatar and accept that the scarcity is gone. <b>Map the reservoir. Do not map the road.</b></p>
     <p><strong>Beats that make it this fight, in order:</strong></p>
     <ul>
       <li><strong>It does not attack first.</strong> It surfaces and it <em>calls</em>, in nine voices at once, and every one is a name somebody at the table has lost.</li>
@@ -632,10 +1017,14 @@
       <li><strong>It cannot stop them filing.</strong> No hands, no reach into paper. If the plan runs through the record it will fail to prevent them, and it will keep trying anyway.</li>
     </ul>
     <p class="note">If a player asks whether they recognise any of the faces — <b>yes.</b> Give them a name off the flyer sheet. Marguerite Hollis. Rosa Salas. Everett and Maeve, next to each other.</p>
+  
+    <div class="refs"><span class="lbl">Reference</span><button class="jump" data-goto="stats#s-thing">The Thing — stat block</button><button class="jump" data-goto="stats#s-walker">Walker</button><button class="jump" data-goto="mech#m-call">The Call</button></div>
+    <div class="dev"><div class="sub">Development</div><p>It surfaces, it calls, and then the party has to decide what they are willing to destroy.</p><ul class="ifthen"><li><b>If they disengage</b> — it disengages. It has never once been the aggressor.</li><li><b>If they commit to lethal damage</b> — say out loud what goes with it, before the killing blow.</li><li><b>If the plan runs through the record</b> — it cannot stop them filing, and it will keep trying anyway.</li></ul></div>
   </div>
 
-  <div class="beat">
+  <div class="beat" id="b-choice">
     <h3>The Choice</h3>
+    <div class="where"><span class="k">15</span><button class="jump" data-goto="loc">The dam &amp; service road</button></div>
     <p>No image. Nothing on screen. Just the question.</p>
     <div class="grid2">
       <div class="card" style="margin:0">
@@ -648,6 +1037,8 @@
       </div>
     </div>
     <div class="never">Resolve it for them. Editorialise afterward. Debrief. End on an image.</div>
+  
+    <div class="dev"><div class="sub">Development</div><p>Resolve it for them, editorialise afterward, debrief, end on an image.</p><ul class="ifthen"><li><b>If they kill it without ever reaching Emmet</b> — legitimate. The case closes, the walkers stop existing, and Mackey has nine doors to knock on. Post nothing after.</li></ul></div>
   </div>
 </section>
 
@@ -655,7 +1046,7 @@
 <section class="tab" id="stats">
   <h2>Stat blocks <em>two</em></h2>
 
-  <div class="stat">
+  <div class="stat" id="s-thing">
     <div class="cr">CR 8 · 3,900 XP</div>
     <h3>The Thing in the Reservoir</h3>
     <div class="type">Large ooze (do not name it), unaligned</div>
@@ -677,7 +1068,7 @@
     <div class="rule"></div>
     <div class="act"><span class="n">Amorphous.</span> Moves through a space as narrow as one inch. <strong>Any standing water in Halloway is its space</strong> — taps, pipes, the tower, a full bathtub, a dog's bowl.</div>
     <div class="act"><span class="n">Aversion to Fire.</span> Disadvantage on attacks and checks when it has taken fire damage since its last turn.</div>
-    <div class="act"><span class="n">Sulfurous Impersonation.</span> As an action, forms a <strong>Walker</strong> from a memory it holds. Maintains up to six.</div>
+    <div class="act"><span class="n">Sulfurous Impersonation.</span> As an action, forms a <strong>Walker</strong> from a memory it holds. <strong>Maintains up to six at once.</strong></div>
     <div class="act"><span class="n">Legendary Resistance (2/day).</span></div>
     <div class="rule"></div>
     <div class="act"><span class="n">Multiattack.</span> Two Pseudopods, or one Pseudopod and one Memory Drain.</div>
@@ -690,12 +1081,13 @@
     <div class="act"><span class="n">Volunteer.</span> One Walker it controls moves up to its speed and may Call.</div>
     <div class="act"><span class="n">Take (costs 2).</span> Memory Drain against one creature that failed a save since its last turn.</div>
     <div class="rule"></div>
+    <p class="note"><b>Six is the cap, and it is deliberate.</b> Volunteer assumes a pool small enough to steer. If you want a crowd of walker tokens on the map, put the extras down as <b>independent</b> walkers already standing in the street — they roll their own initiative and are not part of its action economy. Don't raise the cap; raise the crowd.</p>
     <p class="note"><b>Running it.</b> It does not want to kill anyone and should never read as enraged. It is protecting one memory, the way it has for sixty years. Every attack is defensive. If the party disengages, it disengages.</p>
     <p class="note"><b>Ending it.</b> At 0 HP it stops, and everything it holds stops with it — every walker, all nine of the taken, and Laura. <b>Say this out loud before the killing blow</b> if they haven't worked it out. They deserve to choose it knowingly.</p>
     <p class="note"><b>The other ending.</b> If Emmet says it out loud, the bargain is void. It doesn't die — it <b>lets go</b>, all at once. Recommendation: they simply stop being there, nobody sees it happen, and the town wakes up remembering nine funerals it never held.</p>
   </div>
 
-  <div class="stat">
+  <div class="stat" id="s-walker">
     <div class="cr">CR 3 · 700 XP</div>
     <h3>Walker</h3>
     <div class="type">Medium construct (memory), unaligned</div>
@@ -720,6 +1112,7 @@
     <div class="rule"></div>
     <p class="note"><b>Fidelity varies by age.</b> Laura and Wes are composites built from town memory — warm but subtly wrong, and Wes barely resolves at all. The nine recently taken are first-person recordings and they are <b>word-perfect</b>: the right laugh, the right turn of phrase, the thing only a spouse would know. That is why the Call works better every month.</p>
     <p class="note"><b>Laura is a Walker with Familiar Face inverted</b> — warm, coherent, and she does not Call unless the Thing makes her. <b>She is not a combat encounter.</b> If the party attacks her, let it work, and let it be the worst thing they do all night.</p>
+    <p class="note"><b>On the map she is the only distinct silhouette</b> — hands raised, palms out. Every other walker is the same figure. That is how the table works out which token they are not supposed to attack, without you telling them.</p>
   </div>
 </section>
 
@@ -728,39 +1121,40 @@
   <h2>Cast <em>living and otherwise</em></h2>
 
   <div class="cast">
-    <div class="who">
+    <div class="who" id="c-mayor">
       <h3>Mayor Daniel Crale, 72</h3>
       <div class="role">The killer · your most cooperative contact</div>
       <p>No memory of it. Beloved, effective, decent. Believes his father did it and has quietly grieved and half-hated him for sixty years — the one fragment the thing left him. His whole civic life is penance misfiled against the wrong man. <strong>He is the reason they were called.</strong> Nine people gone on his watch and he cannot live with it.</p>
     </div>
-    <div class="who">
+    <div class="who" id="c-emmet">
       <h3>Emmet Crale, ~95</h3>
       <div class="role">The father · the man who signed</div>
       <p>Hospice at Cedarline, an hour out on a bad road — off the reservoir, drinking different water, which is why his mind can decay normally and why nobody can manage what comes out of his mouth. He agreed to hold the night so his son wouldn't have to, and has held it alone for sixty years. The last uneaten copy of the truth, dissolving.</p>
     </div>
-    <div class="who">
+    <div class="who" id="c-mackey">
       <h3>Sheriff Ruth Mackey, 50s</h3>
       <div class="role">Competent · composed · privately fraying</div>
       <p>Third holder of the office since Emmet. Enforces a curfew with no ordinance behind it because the job was handed to her that way, twice removed. Not corrupt and not stupid — she is losing people and has nothing. Played attractive and dry-witted; the exhaustion lives under the composure. <strong>Spend "I've been trying to tell you" on her.</strong> Do not make her one of the taken.</p>
     </div>
-    <div class="who">
+    <div class="who" id="c-cassandra">
       <h3>Cassandra Ardley, 75</h3>
       <div class="role">Laura's sister · the only clear head in town</div>
       <p>Left Halloway at nineteen, came back at seventy — fifty years off that water. The only person alive in town who can say Laura's name and mean a person. She remembers the bullying, the reservoir, and her sister. She has been telling people for five years and they nod and forget.</p>
     </div>
-    <div class="who">
+    <div class="who" id="c-laura">
       <h3>Laura Ardley, 18</h3>
       <div class="role">The first walker · Deer View Diner</div>
       <p>Walking home from a shift, sixty years running. A composite — her own last minutes, Danny's view of her, and sixty years of the town's fond half-memory. Let her get a detail about her own life wrong. She does not know she is dead and cannot hold it past dawn. <strong>She can describe her killer perfectly: a twelve-year-old boy.</strong></p>
     </div>
-    <div class="who">
+    <div class="who" id="c-wes">
       <h3>Wes Harrow, 18</h3>
       <div class="role">The incomplete walker</div>
       <p>The thing only ever had him from the outside. He never speaks, keeps his distance, and the face does not resolve. The party will register the difference between the two walkers long before they understand what it means. He bullied Danny for two years and held him under at the reservoir. He did not deserve this.</p>
+      <p class="note"><b>Never put Wes on a map.</b> His entire function is that he is always further away and never resolves. A token is a fixed square at a fixed distance wearing the same silhouette as everyone else, and it kills the clue. He stays in description.</p>
     </div>
   </div>
 
-  <div class="card" style="margin-top:16px">
+  <div class="card" id="c-accounts" style="margin-top:16px">
     <h3>The Two Accounts</h3>
     <p>The thing holds Laura's experience and Danny's intent, and they do not match. From where she stood, she was murdered. From where he stood, he panicked. <strong>Neither is a lie and there is no reconciling them.</strong> The party cannot get a clean answer because one does not exist.</p>
     <p class="note">The coroner arrived at the same place independently: <b>Laura's Manner of Death is blank. Wes's says HOMICIDE.</b></p>
@@ -853,9 +1247,27 @@
   });
   document.addEventListener('keydown', function(e){
     if(e.metaKey||e.ctrlKey||e.altKey) return;
-    if(/^[1-8]$/.test(e.key)){
+    if(/^[1-9]$/.test(e.key)){
       var t = tabs[parseInt(e.key,10)-1];
       if(t) show(t.dataset.t);
+    }
+  });
+
+  // cross-tab jumps: data-goto="tabId#anchorId"
+  document.addEventListener('click', function(e){
+    var j = e.target.closest('[data-goto]');
+    if(!j) return;
+    var parts = j.dataset.goto.split('#');
+    show(parts[0]);
+    if(parts[1]){
+      var el = document.getElementById(parts[1]);
+      if(el){
+        if(el.tagName==='DETAILS') el.open = true;
+        el.scrollIntoView({block:'start'});
+        el.style.transition='background .9s';
+        el.style.background='rgba(88,24,13,.09)';
+        setTimeout(function(){ el.style.background=''; }, 950);
+      }
     }
   });
 
