@@ -720,8 +720,9 @@
   <div class="loc"><div class="locnum">6</div><div>
     <h3>The motel</h3>
     <div class="locmeta">Main Street, east end · Map B · the party's base</div>
-    <p>Twelve units, an office with a bell, a vending machine. <b>The exterior doors lock at eleven</b> and the
-      night clerk goes home, not hostile, just done. Anyone outside after that is outside.</p>
+    <p>Twelve units, an office with a bell, a vending machine. The only lodging in Halloway, and the mayor
+      settles the bill himself out of the town account on the afternoon they arrive. <b>The exterior doors lock at
+      eleven</b> and the night clerk goes home, not hostile, just done. Anyone outside after that is outside.</p>
     <p class="find"><b>Findable here:</b> the curfew, enforced on them personally for the first time. This is where
       Act 1 turns from quaint to strict.</p>
     <button class="jump" data-goto="a1#b-eleven">Act 1 · Eleven o'clock</button>
@@ -868,6 +869,9 @@
     <div class="say">Late sun on open water, flat and still. A gravel service road runs along the bank and out of sight. Past the treeline the town sits in the low ground, a grid of roofs, a water tower, one steeple. Nothing is moving and nothing is loud. Behind you the air closes up, and your way home is gone until Thursday.</div>
     <div class="never">Flag the reservoir. They have landed on the answer. It is scenery for two days. Do not let the Coin react.</div>
     <p class="note"><b>They are stranded.</b> Return transit is scheduled, not summoned, two days. No vehicle. The road out is too long to walk at night.</p>
+    <div class="rule"></div>
+    <p><strong>How they get into town.</strong> It is about a twenty-minute walk down the reservoir road, and there is a car parked at the turn. Mayor Daniel Crale has been waiting beside it since four o'clock, because Ezriel rang the municipal switch before they left and somebody finally told him yes. He drives them in.</p>
+    <p class="note"><b>That road is the road Laura walked home on.</b> Their first ride in Halloway is with the man who killed her, on the ground where he did it, and neither of them knows. Say nothing.</p>
   
     <div class="dev"><div class="sub">Development</div><p>The aperture closes behind them. They are stranded until Thursday, on foot, with the town in the low ground ahead.</p><ul class="ifthen"><li><b>If they search the reservoir now</b>, flat water, nothing. They have landed on the answer and it is scenery for two days.</li><li><b>If they ask about the water tower</b>, it is a water tower.</li></ul></div>
   </div>
@@ -876,7 +880,8 @@
     <h3>The town, before dark</h3>
     <div class="where"><span class="k">1</span><span class="k">2</span><span class="k">3</span><span class="k">5</span><span class="k">10</span><button class="jump" data-goto="loc">Main Street</button></div>
     <div class="pops"><button class="pop rd" data-pop="read-town">Read aloud</button><button class="pop pr" data-pop="prop-flyers">The flyers</button><button class="pop pr" data-pop="prop-newsletter">The newsletter</button></div>
-    <p>Mayor Crale meets them himself, warm, grateful, apologetic about the drive, opens every door in town. He is the reason they were called. <strong>Play him completely straight.</strong></p>
+    <p>Crale is warm, grateful, and apologetic about how far out the town is. He opens every door in Halloway for them. He is the reason they were called. <strong>Play him completely straight.</strong></p>
+    <p><strong>He puts them up at the motel.</strong> Twelve units, one of them is always free, and he settles it at the desk himself out of the town account before anybody can offer. He is embarrassed there is nowhere better. <b>Do not let the party pay for anything in Halloway.</b></p>
     <span class="drop">town-day <span class="ch">#play</span></span>
     <span class="drop">flyers <span class="ch">#evidence · back to back, nothing said between</span></span>
     <span class="drop">mayor <span class="ch">#play → PIN IT</span></span>
@@ -1346,7 +1351,8 @@ window.POP = {
 
 "read-briefing":["rd","The briefing",`
 <div class="spoken">Ezriel doesn't sit down. He puts two call sheets on the desk in front of you, one pink and one yellow, six weeks apart, and he lets you read them before he says anything. When you look up: that's everything I have. No file, no compass reading, nothing from anybody else. A mayor who can't get a straight answer in his own town, and a night nurse who called at four in the morning and apologised twice for it.</div>
-<p class="dmnote"><b>Ezriel has nothing else and he should say so.</b> The Lantern's file on Halloway is empty. If they push, he stays empty.</p>`],
+<p class="dmnote"><b>Ezriel has nothing else and he should say so.</b> The Lantern's file on Halloway is empty. If they push, he stays empty.</p>
+<p class="dmnote"><b>He rings ahead.</b> One call to the Halloway municipal switch, so the mayor knows somebody is coming. That is why there is a car at the reservoir turn when they land.</p>`],
 
 "read-town":["rd","The town, before dark",`
 <div class="spoken">Main Street on a warm afternoon. A diner with a hand-lettered board out front, a hardware store with two men talking on the step and a dog asleep in the shade of the awning, a bank sign flashing the time and then the temperature. Somebody waves at you from across the road because you're new, not because they want anything. It is a nice town and it is pleased to see you.</div>
