@@ -201,7 +201,8 @@
   .clock div:last-child{border-right:0}
   .clock .t{font:600 22px/1 var(--serif);color:var(--red2);letter-spacing:.02em;margin-bottom:7px}
   .clock .d{font:13.5px/1.5 var(--sans);color:var(--dim)}
-  .clock div:nth-child(3) .t{color:var(--never)}
+  .clock div:nth-child(4) .t{color:var(--never)}
+  .clock div:nth-child(1) .t{color:var(--spoken)}
 
   /* ---------- stat block ---------- */
   .stat{
@@ -624,6 +625,7 @@
     <summary><span class="num">4</span> Midnight — the curfew</summary>
     <div class="body">
       <div class="clock">
+        <div><div class="t">Dusk</div><div class="d">The fringe. One figure only, briefly, and only Laura. She talks and then she is gone. No Call, no danger.</div></div>
         <div><div class="t">11:00</div><div class="d">Doors shut. Curtains close. Porch lights go <b>off</b>, not on.</div></div>
         <div><div class="t">11:30</div><div class="d">Every window in town is covered. This is the entire defence.</div></div>
         <div><div class="t">12:00</div><div class="d">The walkers are on the streets until first light. Midnight is the hour Laura died, and it is the only hour the thing has. See <em>What the thing is</em>.</div></div>
@@ -855,8 +857,9 @@
     <div class="locmeta">Reservoir to town, then County Rd to Cedarline · no map</div>
     <p>Two-lane blacktop, gravel shoulders, telephone poles, split-rail fence, treeline both sides. The road Laura
       died on is the road into town, the party drives it on arrival without knowing that.</p>
-    <p class="find"><b>Findable here:</b> Laura, walking home from a shift, sixty years running. The courier at the
-      ten-mile mark, standing beside his own vehicle's tracks. Figures at intervals on the way to Cedarline.</p>
+    <p class="find"><b>Findable here:</b> Laura, walking home from a shift, sixty years running, and she is on this
+      road at dusk as well as at midnight. The courier at the ten-mile mark, standing beside his own vehicle's tracks.
+      Figures at intervals on the way to Cedarline.</p>
     <div class="never">Put this stretch on a battle map. Tokens on a grid read as an encounter, the table rolls
       initiative, and driving past stops being something anyone considers.</div>
     <button class="jump" data-goto="a2#b-laura">Act 2 · Laura, on the road</button>
@@ -896,6 +899,18 @@
     <p class="note"><b>That road is the road Laura walked home on.</b> Their first ride in Halloway is with the man who killed her, on the ground where he did it, and neither of them knows. Say nothing.</p>
   
     <div class="dev"><div class="sub">Development</div><p>The aperture closes behind them. They are stranded until Thursday, on foot, with the town in the low ground ahead.</p><ul class="ifthen"><li><b>If they search the reservoir now</b>, flat water, nothing. They have landed on the answer and it is scenery for two days.</li><li><b>If they ask about the water tower</b>, it is a water tower.</li></ul></div>
+  </div>
+
+  <div class="beat" id="b-girl">
+    <h3>The girl on the road <span class="time">5 min &middot; last light</span></h3>
+    <div class="where"><span class="k">16</span><button class="jump" data-goto="loc">Reservoir Road</button></div>
+    <div class="pops"><button class="pop rd" data-pop="read-girl">Read aloud</button><button class="pop tr" data-pop="truth-thing">Why she can be out at dusk</button></div>
+    <p>They meet Laura Ardley on the walk down, before they meet a single living resident, and she is kind to them.</p>
+    <p><strong>She tells them to be off the road before dark.</strong> Not because she knows anything. Because it is an unlit road and she is a sensible eighteen-year-old walking home from a shift, and the advice happens to be the rule.</p>
+    <p class="note"><b>This is the dusk fringe.</b> One figure, briefly, and only ever her. No Call, no Memory Drain, nothing to roll. See the Mechanics clock.</p>
+    <div class="never">Let them work out what she is. Play her completely solid and completely ordinary, and let her leave because the headlights arrive, not because she vanishes dramatically.</div>
+    <div class="refs"><span class="lbl">Reference</span><button class="jump" data-goto="cast#c-laura">Laura &mdash; cues</button><button class="jump" data-goto="mech#m-midnight">Midnight</button></div>
+    <div class="dev"><div class="sub">Development</div><p>Crale's headlights end the scene and the party gets in the car.</p><ul class="ifthen"><li><b>If they ask him about her</b> &mdash; he saw nobody on the road, and he is telling the truth.</li><li><b>If they describe her to anyone in town</b> &mdash; run the Curse. The one person who could answer is Cassandra, and they have not met her yet.</li><li><b>If they refuse the lift and walk</b> &mdash; fine. They reach the motel after dark on foot and Act 1 continues from the town beat.</li></ul></div>
   </div>
 
   <div class="beat" id="b-town">
@@ -1335,7 +1350,7 @@
     <div class="who" id="c-laura">
       <h3>Laura Ardley, 18</h3>
       <div class="role">The first walker · Deer View Diner</div>
-      <p>Walking home from a shift, sixty years running. A composite, her own last minutes, Danny's view of her, and sixty years of the town's fond half-memory. Let her get a detail about her own life wrong. She does not know she is dead and cannot hold it past dawn. <strong>She can describe her killer perfectly: a twelve-year-old boy.</strong></p>
+      <p>Walking home from a shift, sixty years running, and the only figure the thing can hold at dusk. A composite, her own last minutes, Danny's view of her, and sixty years of the town's fond half-memory. Let her get a detail about her own life wrong. She does not know she is dead and cannot hold it past dawn. <strong>She can describe her killer perfectly: a twelve-year-old boy.</strong></p>
     </div>
     <div class="who" id="c-wes">
       <h3>Wes Harrow, 18</h3>
@@ -1757,7 +1772,11 @@ Object.assign(window.POP, {
 <p><b>It is not nocturnal. It is stuck.</b> The thing was given one night, and that night has a time on it. Laura finished her shift at 23:40, walked about twenty minutes, and died at roughly midnight. The 352 file records the 23:40 without any idea what it is worth.</p>
 <p>Everything the thing does is that hour, played again. It does not hunt at night, it <em>replays</em>. The walkers come out at midnight because that is where the memory starts. They stop at first light because that is where it ends: Danny put the bodies in the water and went home before dawn, and there is nothing after that to play.</p>
 <p><b>Laura is always walking home.</b> The same route, from the diner toward her house, at the same time, every night for sixty years. That is why she is on Reservoir Road and never anywhere else. She is on her commute.</p>
-<p><b>The nine are grafted onto her hour.</b> They have no schedule of their own. They can only be out while it is playing, which is why nobody in Halloway has ever seen a walker at nine in the evening.</p>
+<p><b>The nine are grafted onto her hour.</b> They have no schedule of their own. They can only be out while it is playing, which is why nobody in Halloway has ever seen a crowd of walkers in the early evening.</p>
+<h4>The fringe, and where the ghost story came from</h4>
+<p>Midnight to first light is the full window: up to six walkers, and the Call works. <b>The hour before it is the fringe.</b> Out there the thing can hold exactly one figure, briefly, and only the one it has most completely, which is Laura. She cannot sustain it and she cannot stay. No Call, no Memory Drain, no danger. She talks, and then the light changes and she is not there.</p>
+<p><b>That is the sixty-year ghost story, and it is the whole of it.</b> Not an army every night. One girl, occasionally, at dusk, on the reservoir road. It is exactly how a town ends up with a fond legend about two kids and no facts attached to it.</p>
+<p class="dmnote"><b>It also gives the eleven o'clock rule a real basis.</b> The town did not only round down out of fear. Some of them have seen something in the last of the light, and not one of them can finish the sentence about it.</p>
 <p class="dmnote"><b>The thing itself never leaves the water.</b> It reaches the streets through the taps and the pipes and it projects the walkers, up to six at once. If the party sets an ambush for it in town, nothing comes.</p>
 <p class="dmnote"><b>Do not explain this at the table.</b> A player who works out that Laura is always on the same road at the same time has found the best clue in the session without help.</p>
 <p class="dmnote"><b>Its only real enemy is a record.</b> It cannot reach paper and it cannot stop anybody filing. Everything it does to Halloway has the side effect of keeping the street empty and the story unwritten. See <em>Why they obey the curfew</em> for how that works.</p>
@@ -1815,6 +1834,19 @@ Object.assign(window.POP, {
 <p class="dmnote"><b>This is what makes Cassandra dangerous.</b> She is not a brave old woman being futile. She stands at the door and looks, every night, for five years, and she has been trying to get somebody to write it down. She is the only counter-measure this town has ever had, and the party is the first record she has managed to make.</p>
 <p class="dmnote"><b>It also reframes the escort.</b> The town's one instinct is to get people indoors, and that instinct is the reason no evidence has ever accumulated. When six neighbours walk the party off the street at midnight they are protecting them and defending the thing in the same motion, and not one of them will ever know it.</p>
 <p class="dmnote"><b>This is the most likely question at the table and there is no in-world answer to it.</b> If a player asks a resident, run the Curse. If a player asks you, the answer is on this page and they are never getting it from inside the fiction.</p>`]
+
+});
+</script>
+<script>
+Object.assign(window.POP, {
+
+"read-girl":["rd","The girl on the road",`
+<div class="spoken">A girl comes up the road toward you in the last of the light. Work clothes, a cardigan, a bag over one shoulder, walking like her feet hurt. She slows down when she sees you and she looks pleased, the way you do when you thought you had the whole walk to yourself.<br><br>She asks if you're lost. Then, before you have finished answering, she says you want to be off this road before dark. It gets proper dark out here, she says. There's no light the whole way to the turn.<br><br>Then the light changes. Headlights come round the bend behind her and swing across all of you, and when they have gone past there is nobody on the road but you.</div>
+<p class="dmnote"><b>She is not warning them about the thing.</b> She does not know about the thing, the curfew, or the nine. She is a girl from sixty years ago giving sensible advice about an unlit road, and it happens to be the same rule the town will give them in four hours. That is the joke and it is not funny.</p>
+<p class="dmnote"><b>She has no current information at all.</b> Ask about the missing people and she has no idea what they mean. Ask what year it is and she will tell you 352 without hesitating. Ask where she is going and she says home, she has just finished at the Deer View. <b>Every answer is sixty years old and she is not lying.</b></p>
+<p class="dmnote"><b>The headlights are Mayor Crale.</b> He rounds the bend, she is gone, and he gets out apologising for being late. The man who killed her interrupts her mid-sentence and then drives the party past the spot. Nobody at the table knows that for two hours and nothing about it needs pointing at.</p>
+<p class="dmnote"><b>No roll, no Call, no danger.</b> The dusk fringe cannot hurt anyone. If a player tries to grab her or block her, they get an ordinary teenage girl who is confused and a little frightened of them, and then the lights come and she is gone anyway.</p>
+<p class="dmnote"><b>She will not remember this.</b> When they meet her again on the same road in Act 2 it is a first meeting for her, and every night resets. If a player greets her like an acquaintance, let the silence do it.</p>`]
 
 });
 </script>
