@@ -573,7 +573,7 @@
 
 <!-- ============ MECHANICS ============ -->
 <section class="tab" id="mech">
-  <h2>The central mechanics <em>six systems</em></h2>
+  <h2>The central mechanics <em>seven systems</em></h2>
 
   <details class="mech" id="m-hole" open>
     <summary><span class="num">1</span> The Hole — passive memory drain, all session</summary>
@@ -651,6 +651,23 @@
     <div class="body">
       <p>Anything written down is immune to all of the above. Files, flyers, photographs, the case file, the #evidence channel, and anything a PC writes in their own notes.</p>
       <p>This is the party's only reliable instrument and it should feel like one.</p>
+    </div>
+  </details>
+  <details class="mech" id="m-challenge">
+    <summary><span class="num">7</span> The skill challenge, and how to run one</summary>
+    <div class="body">
+      <p>Used once tonight, at the collection in Act 1. It is not a 5e rule and nothing in the books will back you up, so here is the whole procedure.</p>
+      <ul>
+        <li><b>Keep two tallies.</b> Successes in one column, failures in the other. You are racing them to three. It is not a total and there is no net score.</li>
+        <li><b>Go round the table.</b> Each player who engages says what they are actually doing, then rolls one check against <b>DC 14</b>. Persuasion, Insight, Intimidation or Deception, whichever fits what they described. Anything sensible they invent is fair.</li>
+        <li><b>Mark it and move on</b> to the next player. Keep going round until one column reaches three.</li>
+        <li><b>Do not roll the same approach twice.</b> If somebody repeats a line that already failed, ask for something new rather than another die.</li>
+      </ul>
+      <div class="rule"></div>
+      <p><b>Three successes first.</b> They buy information, not freedom: a name, the fact it started eighteen months ago, that somebody went out and didn't come back. All fragmentary, all interrupted by Cassandra's Curse.</p>
+      <p><b>Three failures first.</b> Hands on them. Six ordinary people physically moving a stranger off a street, still apologising while they do it.</p>
+      <div class="never">Let a roll decide whether Act 1 ends. It doesn't. They end up indoors either way, and the challenge only decides what they learn on the way there.</div>
+      <p class="note"><b>If they escalate to violence instead,</b> commoner stat blocks. They don't fight back well and they keep apologising. Mackey hears about it by morning.</p>
     </div>
   </details>
 </section>
@@ -928,7 +945,7 @@
     </ul>
     <p class="note">Nobody here is an antagonist. They are terrified people improvising a rule that is eighteen months old, and they cannot say why.</p>
   
-    <div class="refs"><span class="lbl">Reference</span><button class="jump" data-goto="mech#m-call">The Call · DC 15 Wis</button><button class="jump" data-goto="mech#m-midnight">Midnight</button></div>
+    <div class="refs"><span class="lbl">Reference</span><button class="jump" data-goto="mech#m-challenge">The skill challenge</button><button class="jump" data-goto="mech#m-call">The Call · DC 15 Wis</button><button class="jump" data-goto="mech#m-midnight">Midnight</button></div>
     <div class="dev"><div class="sub">Development</div><p>They get walked back, without violence. Then the screen door, the voice saying a name nobody knows, and cut.</p><ul class="ifthen"><li><b>If they escalate to combat</b>, commoner blocks. They don't fight back well and they keep apologising.</li><li><b>If they clear the challenge</b>, fragments only: a name, eighteen months, Mrs. someone who went out. All of it interrupted by the Curse.</li><li><b>Do not investigate the voice tonight.</b> No follow-up, no roll. End the act on nothing.</li></ul></div>
   </div>
 
@@ -1360,7 +1377,7 @@ window.POP = {
 
 "read-collection":["rd","The collection",`
 <div class="spoken">Two houses down a porch light comes on and then goes straight back off. A screen door. A woman in a housecoat with a coat pulled over the top of it comes down the steps and starts toward you, and she is already talking before she is close enough for you to hear her. Then a second door. Then a third. Six of them, with a deputy at the back, and every one of them is apologising while they walk you off the street.</div>
-<p class="dmnote"><b>Nobody raises their voice.</b> Three successes before three failures at DC 14. Success buys fragments, not an exit.</p>`],
+<p class="dmnote"><b>Nobody raises their voice.</b> Two tallies raced to three, DC 14, one check per player per round. Success buys fragments, not an exit, and they end up indoors either way. Full procedure is in Mechanics 7.</p>`],
 
 "read-cassandra":["rd","Cassandra Ardley",`
 <div class="spoken">She has the kettle on before you have finished explaining who you are. There is an oilcloth on the table and a shoebox already open on it, photographs laid out in rows like she has been waiting to show somebody. She sits down across from you and says: you're asking about Laura. Nobody has asked about Laura in five years.</div>
