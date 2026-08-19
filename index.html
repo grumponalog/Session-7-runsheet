@@ -341,6 +341,13 @@
   /* jump targets must clear the sticky header */
   .beat,.card,.loc,.stat,.who,.mech{scroll-margin-top:132px}
 
+.maplink{
+    font:600 10.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;
+    color:var(--red2);text-decoration:none;border:1px solid var(--line2);
+    padding:6px 10px;margin-left:10px;white-space:nowrap;
+  }
+  .maplink:hover{border-color:var(--red);color:var(--red)}
+
   /* ---------- cross-tab jump chips ---------- */
   .jump{
     display:inline-flex;align-items:center;gap:6px;cursor:pointer;
@@ -399,6 +406,7 @@
     <div class="titlerow">
       <h1>Session 7 — Curfew <span>· Halloway</span></h1>
       <div class="status">Ready to run</div>
+      <a class="maplink" href="map.html">Decision map →</a>
     </div>
     <nav id="nav" role="tablist">
       <button role="tab" aria-selected="true" data-t="prep"><kbd>1</kbd>Prep</button>
@@ -1029,6 +1037,7 @@
     <h3>The Choice</h3>
     <div class="where"><span class="k">15</span><button class="jump" data-goto="loc">The dam &amp; service road</button></div>
     <p>No image. Nothing on screen. Just the question.</p>
+    <p class="note"><b>Both gates are in this act.</b> Walk the <a href="map.html">decision map</a> if you want to see which endings are still reachable given what they have actually done — the van and the hospice are the only two forks in the session that change the answer.</p>
     <div class="grid2">
       <div class="card" style="margin:0">
         <h3>Kill it</h3>

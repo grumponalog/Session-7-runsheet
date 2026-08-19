@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session 7 — Curfew · Decision map</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  :root{
+    --bg:#FBF1DA;
+    --panel:#F6EACE;
+    --panel2:#EFE0C0;
+    --line:#DCC9A4;
+    --line2:#C0A374;
+    --ink:#241A12;
+    --dim:#584836;
+    --dimmer:#7C6952;
+    --spoken:#8A6A2F;
+    --drop:#1F4A5C;
+    --never:#58180D;
+    --red:#58180D;
+    --red2:#7A2A16;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  }
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg);
+    background-image:
+      radial-gradient(ellipse at 12% 8%, rgba(160,120,60,.055), transparent 55%),
+      radial-gradient(ellipse at 88% 70%, rgba(140,100,50,.05), transparent 55%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
+    background-attachment:fixed;
+    color:var(--ink);
+    font:16px/1.6 var(--serif);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(251,241,218,.96);
+    backdrop-filter:blur(6px);
+    border-bottom:3px double var(--line2);
+  }
+  .hwrap{max-width:1180px;margin:0 auto;padding:16px 30px}
+  .titlerow{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+  h1{
+    margin:0;font-family:var(--serif);font-size:20px;font-weight:600;
+    color:var(--red);letter-spacing:.06em;text-transform:uppercase;
+  }
+  h1 span{color:var(--dimmer);font-weight:400;letter-spacing:.04em}
+  .back{
+    margin-left:auto;font:600 11.5px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;
+    color:var(--red2);text-decoration:none;border:1px solid var(--line2);padding:7px 11px;
+  }
+  .back:hover{border-color:var(--red);color:var(--red)}
+
+  main{max-width:1180px;margin:0 auto;padding:30px 30px 120px}
+
+  .intro{
+    background:var(--panel2);border:1px solid var(--line2);
+    padding:16px 22px;margin:0 0 22px;font:14.5px/1.62 var(--sans);color:var(--dim);
+  }
+  .intro b{color:var(--red2)}
+
+  .legend{
+    display:flex;flex-wrap:wrap;gap:12px 26px;align-items:center;
+    font:13px/1 var(--sans);color:var(--dim);margin:0 0 26px;
+  }
+  .legend span{display:flex;align-items:center;gap:9px}
+  .sw{width:26px;height:13px;flex:none;border-radius:3px;background:var(--panel)}
+
+  #cv{position:relative;width:100%}
+  #svg{position:absolute;inset:0;pointer-events:none;overflow:visible}
+
+  .bx{
+    position:absolute;box-sizing:border-box;padding:10px 13px;
+    background:var(--panel);border:1px solid var(--line2);
+    font:14.5px/1.35 var(--sans);color:var(--ink);cursor:pointer;
+  }
+  .bx.br,.bx.opt{border-style:dashed;border-color:var(--line2)}
+  .bx.opt{color:var(--dim);font-style:italic}
+  .bx.bad{border-style:dashed;border-color:var(--never);background:rgba(88,24,13,.06)}
+  .bx.good{border-style:dashed;border-color:var(--spoken);background:rgba(138,106,47,.09)}
+  .bx.end{
+    border-style:solid;border-width:2px;text-align:center;
+    font-family:var(--serif);font-size:17px;font-weight:600;color:var(--red);
+    padding:14px 13px;
+  }
+  .bx:hover{border-color:var(--red2)}
+  .bx[data-on="1"]{
+    border-style:solid;border-width:2px;border-color:var(--red);
+    background:rgba(88,24,13,.07);
+  }
+  .bx.off{opacity:.26;pointer-events:none}
+
+  .act{
+    position:absolute;left:0;width:100%;
+    font:700 10.5px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;
+    color:var(--red);display:flex;align-items:center;gap:14px;
+  }
+  .act::after{content:"";flex:1;height:1px;background:var(--line2)}
+
+  #det{
+    position:sticky;bottom:0;
+    background:var(--panel);border:1px solid var(--line2);border-left:5px solid var(--spoken);
+    padding:16px 22px;margin-top:30px;
+    font:15.5px/1.62 var(--sans);color:var(--ink);min-height:56px;
+  }
+  #det .who{
+    display:block;font:700 10.5px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;
+    color:var(--red);margin-bottom:8px;
+  }
+  #clr{
+    appearance:none;background:var(--panel);border:1px solid var(--line2);color:var(--dim);
+    font:600 12px/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;
+    padding:9px 14px;cursor:pointer;margin-top:14px;
+  }
+  #clr:hover{color:var(--red);border-color:var(--red)}
+
+  @media (max-width:900px){
+    .hwrap,main{padding-left:18px;padding-right:18px}
+    .bx{font-size:13px;padding:8px 10px}
+    .bx.end{font-size:15px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hwrap">
+    <div class="titlerow">
+      <h1>Decision map <span>· Session 7 — Curfew</span></h1>
+      <a class="back" href="index.html">← Runsheet</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<div class="intro">
+  <b>Solid boxes are rails — the story moves whether or not anyone decides anything.</b>
+  Dashed pairs are forks. Six of the eight forks rejoin the spine within one step: they change how the
+  session is told, not how it ends. Only two forks change which endings exist, and they sit back to back
+  near the end. Click any box to read what it does. Click a path to trace it.
+</div>
+
+<div class="legend">
+  <span><i class="sw" style="border:1px solid var(--line2)"></i> on rails</span>
+  <span><i class="sw" style="border:1px dashed var(--line2)"></i> a fork that rejoins</span>
+  <span><i class="sw" style="border:1px dashed var(--spoken);background:rgba(138,106,47,.09)"></i> opens ending B</span>
+  <span><i class="sw" style="border:1px dashed var(--never);background:rgba(88,24,13,.06)"></i> closes ending B</span>
+</div>
+
+<div id="cv"><svg id="svg"><defs>
+<marker id="a1" viewBox="0 0 7 7" refX="6" refY="3.5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0,0 L7,3.5 L0,7 z" fill="#C0A374"/></marker>
+<marker id="a2" viewBox="0 0 7 7" refX="6" refY="3.5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0,0 L7,3.5 L0,7 z" fill="#58180D"/></marker>
+</defs></svg></div>
+
+<div id="det">Click any box to read what it does to the story.</div>
+<button id="clr">Clear the path</button>
+
+</main>
+
+<script>
+(function(){
+var N=[
+['n1','S',34,'Two intake call sheets','rail','The briefing','Six weeks apart, off the crank extension at Meridian PD that routes to Observation. Nobody connected them but Ezriel. No Lantern file, no compass reading — have him say so out loud.'],
+['n2','S',102,'Arrival — the aperture closes behind them','rail','Arrival','They land on the reservoir bank, which is the answer, and it is scenery for two days. Stranded until Thursday, no vehicle, and the road out is too long to walk at night.'],
+['n3','S',170,'Halloway, before dark','rail','The town','Mayor Crale meets them himself — warm, grateful, apologetic about the drive — and opens every door in town. He is the reason they were called. Play him completely straight.'],
+['n4','S',238,'Flyers, fast clocks, the delivery van','opt','Optional texture','Cheap and load-bearing. Eight faces behind diner glass, every clock in town four minutes fast, and a van nobody has moved in three weeks. Cut these only if Act 1 runs long.'],
+['n5','S',306,'Eleven o’clock','rail','The curfew','Porch lights go off, not on. Every window covered by half past. The motel’s exterior doors lock and the night clerk goes home — not hostile, just done.'],
+['w1a','L',374,'Somebody breaks curfew','br','g1','The collection comes for them: six neighbours and a deputy, apologetic and absolutely determined. Three successes before three failures, DC 14. Bilf will stay out. Let him.'],
+['w1b','R',374,'Everyone stays indoors','br','g1','They hear it through the wall instead — the screen door, the voice, the neighbours not turning around. Cheaper, and the act still lands.'],
+['n6','S',446,'A screen door. A voice. A name nobody knows.','rail','The button','No image, no investigation, no roll. After ten drops, cutting to nothing is the beat. End Act 1 here and do not let them chase it.'],
+
+['n7','S',534,'Cassandra Ardley','rail','Act 2 · the only clear head','Seventy-five, left at nineteen, came back at seventy. Fifty years off that water, and the only person in town who can say Laura’s name and mean a person.'],
+['w2a','L',602,'The photograph, and Laura as a person','br','g2','Her sister as a human being, the bullying, the reservoir incident. And a small dark-haired boy at the far edge of the frame, looking straight into the lens while everyone else looks away.'],
+['w2b','R',602,'She is never found. No photograph.','br','g2','Legitimate, and harder. The records room still works because paper does not forget. Consider having her approach them instead — she has been waiting five years for somebody to ask.'],
+['n8','S',674,'The records basement','rail','Sheriff Mackey','She resists on territoriality, not conspiracy — nine people down and the sixty-year-old file is the only strange thing she has. Persuasion DC 13, or just Scipio being a cop at her. Do not make this a wall.'],
+['w3a','L',742,'The 352 file, margin and all','br','g3','<em>One of us has to</em>, in ballpoint, pressed hard enough to emboss the back of the page. It reads as guilt. It is a receipt, and they will not understand it until Act 3.'],
+['w3b','R',742,'No paper. Testimony only.','br','g3','The session becomes an accusation against the most beloved man in town with nothing behind it. Much harder, still winnable, and it makes the mayor’s confession do all the work.'],
+['n9','S',814,'The false case against Emmet Crale','rail','The wrong answer','Coherent, documented, and wrong. They should leave this scene pleased with themselves — that is exactly what makes the flip land. Do not undercut it.'],
+['n10','S',882,'The mayor’s confession','rail','Daniel Crale, 72','<em>I have always thought my father killed those two kids.</em> He is credible by every measure available to the table, because he believes it completely. It is the one fragment the thing left him.'],
+['n11','S',950,'Laura on the road','rail','The first walker','Warm, confused, pleased to have company, walking the last stretch home the way you walk it when your feet hurt. She does not know she is dead and cannot hold it past dawn.'],
+['w4a','L',1018,'She describes a twelve-year-old boy','br','g4','Small, dark hair, someone’s kid from school. Deliver it flat and move on. The table will file it as a ghost being confused, and that is the whole trick.'],
+['w4b','R',1018,'They attack her','bad','g4','It works. She is simultaneously the only surviving witness and the only surviving evidence, and it should be the worst thing they do all night. Let it be.'],
+['n12','S',1090,'Hedy’s log points at the tap','rail','The continuity check','His organic memory drains like everyone else’s; his systems do not. Following the discrepancies backward lands on intake — everything they have consumed in Halloway came out of a tap.'],
+
+['n13','S',1178,'The remains, and a knife','rail','Act 3 · the reservoir','Two sets, sixty years down, reachable with rope, spells, a Ranger and a service road. Once they are up, the coroner’s sheets mean something.'],
+['w5a','L',1246,'The wound angle: the killer was a child','br','g5','Twenty-two to twenty-eight degrees upward into a standing eighteen-year-old puts the attacker at roughly 140 to 150 centimetres. The dead sheriff did not do it.'],
+['w5b','R',1246,'They miss the arithmetic','br','g5','The knife’s initials will do the work instead, but the reveal arrives as trivia rather than as horror. Try the two coroner’s sheets side by side first.'],
+['n14','S',1318,'Gate the knife — the initials are D.C.','rail','Emmet’s house','Danny will happily let them search his father’s house, which is the problem. Keep them out until the wound angle is on the table: he is away until tomorrow, or the key is at the hospice.'],
+['n15','S',1386,'The van. The battery is flat.','rail','The drive','It cranks and does not catch. Now they are standing on a dark street at 12:40 while somebody pops the hood. Ford or Hedy solves it in a round or two.'],
+['w6b','R',1454,'They never go. Ending B closes.','bad','g6','The most consequential box in the session, and it closes in silence. Emmet never speaks, the thing gets another night, and the table never learns ending B existed. Consider softening this gate — a cruiser from Mackey, if they earned her.'],
+['n16','S',1454,'The road to Cedarline','rail','An hour of bad road','Two-lane blacktop, high beams, treeline. Figures standing in the road at intervals — not blocking, just standing. Not obstacles until somebody decides they are.'],
+['w7a','L',1522,'They stop. Two to four walkers.','br','g7','The middle figure is the courier, standing beside his own vehicle’s tracks at the ten-mile mark. Anyone in the van can be Called through glass; the counter is not looking.'],
+['w7b','R',1522,'They drive past. Nothing happens.','br','g7','No encounter, no cost, and this should be genuinely available. The image already did its work. Do not roll anything — post the road and ask what they do.'],
+['n17','S',1594,'The hospice corridor','rail','Cedarline Care, 4 a.m.','One lit door at the end of a dark hall, and Laura somewhere between them and the lamp — warm, confused, asking them kindly not to go in and wake him.'],
+['n18','S',1662,'Emmet Crale, briefly lucid','rail','The man who signed','Ninety-five, mostly gone, talking to somebody who is not in the room. This is confirmation, not confession. He is not defending himself; he is comforting his son.'],
+['w8a','L',1730,'He says the terms out loud','good','g8','<em>It can only take it out of one of you. I said not him.</em> Only the man who made the bargain can unmake it — this is the single route to ending B in the entire session.'],
+['w8b','R',1730,'He panics. No words.','bad','g8','Pushed hard, he gets frightened and stops making sense. They get confirmation but never the sentence that voids a bargain. Gentle is the whole difference.'],
+['n19','S',1802,'The thing comes up','rail','The reservoir','Nine voices at once and every one is a name somebody at the table has lost. Laura stands between them and it, not understanding, asking them to stop. It does not attack first.'],
+
+['A','L',1890,'A · Kill it','end','g9','Everyone it holds stops existing, Laura included — the only surviving witness and the only surviving evidence. Scipio closes a sixty-year-old double homicide by destroying the witness. The town gets its evenings back and loses its dead, and may get its memory back with them, which means nine deaths learned at once.'],
+['B','S',1890,'B · Break the bargain','end','g9','It does not die. It lets go, all at once, and nobody sees it happen. Danny finds out what he did at seventy-two, from his father, in a hospice room — and then a town learns it about the best man in it. The walkers may or may not be released.'],
+['C','R',1890,'C · Walk away','end','g9','The aperture opens Thursday. Halloway keeps its curfew, the thing keeps eating, and the party files a report. Bleak, unsatisfying, and a legitimate thing to let them choose.']
+];
+var E=[['n1','n2'],['n2','n3'],['n3','n4'],['n4','n5'],
+['n5','w1a','somebody goes out'],['n5','w1b','all indoors'],['w1a','n6'],['w1b','n6'],['n6','n7'],
+['n7','w2a','they find her'],['n7','w2b','they never do'],['w2a','n8'],['w2b','n8'],
+['n8','w3a','they push Mackey'],['n8','w3b','they never do'],['w3a','n9'],['w3b','n9'],['n9','n10'],['n10','n11'],
+['n11','w4a','they talk to her'],['n11','w4b','they attack'],['w4a','n12'],['w4b','n12'],['n12','n13'],
+['n13','w5a','they do the arithmetic'],['n13','w5b','they miss it'],['w5a','n14'],['w5b','n14'],['n14','n15'],
+['n15','n16','it starts'],['n15','w6b','it never starts'],
+['n16','w7a','they stop'],['n16','w7b','they drive on'],['w7a','n17'],['w7b','n17'],['n17','n18'],
+['n18','w8a','gently'],['n18','w8b','they push him'],['w8a','n19'],['w8b','n19'],
+['n19','A'],['n19','C'],['w8a','B','the only route']];
+var ACTS=[[0,'Act 1 — Halloway'],[500,'Act 2 — The Hour'],[1144,'Act 3 — The Reservoir and the Road'],[1856,'The Choice']];
+
+var cv=document.getElementById('cv'), svg=document.getElementById('svg'), det=document.getElementById('det');
+var LANE={S:[32,36],L:[1,29],R:[70,29]};
+var map={};
+N.forEach(function(n){
+  var d=document.createElement('div'), l=LANE[n[1]];
+  d.className='bx '+n[4];
+  d.style.left=l[0]+'%'; d.style.width=l[1]+'%'; d.style.top=n[2]+'px';
+  d.textContent=n[3];
+  d.dataset.id=n[0]; d.dataset.on='0';
+  if(n[4]!=='rail'&&n[4]!=='opt') d.dataset.grp=n[5];
+  d.dataset.label=(n[4]==='rail'||n[4]==='opt')?n[5]:'';
+  d.dataset.txt=n[n.length-1];
+  cv.appendChild(d); map[n[0]]=d;
+});
+ACTS.forEach(function(a){
+  var s=document.createElement('div'); s.className='act'; s.style.top=a[0]+'px';
+  s.innerHTML='<span>'+a[1]+'</span>'; cv.appendChild(s);
+});
+
+function draw(){
+  var cb=cv.getBoundingClientRect(), H=0;
+  N.forEach(function(n){ H=Math.max(H, map[n[0]].getBoundingClientRect().bottom-cb.top); });
+  cv.style.height=(H+16)+'px';
+  svg.setAttribute('width',cb.width); svg.setAttribute('height',H+16);
+  while(svg.childNodes.length>1) svg.removeChild(svg.lastChild);
+  E.forEach(function(e){
+    var A=map[e[0]], B=map[e[1]];
+    if(A.classList.contains('off')||B.classList.contains('off')) return;
+    var a=A.getBoundingClientRect(), b=B.getBoundingClientRect();
+    var sx=a.left+a.width/2-cb.left, sy=a.bottom-cb.top;
+    var tx=b.left+b.width/2-cb.left, ty=b.top-cb.top;
+    var m=sy+(ty-sy)/2;
+    var lit=A.dataset.on==='1'&&B.dataset.on==='1';
+    var gate=(e[0]==='w8a'&&e[1]==='B');
+    var p=document.createElementNS('http://www.w3.org/2000/svg','path');
+    p.setAttribute('d', Math.abs(tx-sx)<2
+      ? 'M'+sx+','+sy+'L'+tx+','+(ty-7)
+      : 'M'+sx+','+sy+'L'+sx+','+m+'L'+tx+','+m+'L'+tx+','+(ty-7));
+    p.setAttribute('fill','none');
+    p.setAttribute('stroke', lit?'#58180D':'#C0A374');
+    p.setAttribute('stroke-width', lit?2.2:1.2);
+    if(gate) p.setAttribute('stroke-dasharray','6 5');
+    p.setAttribute('marker-end','url(#'+(lit?'a2':'a1')+')');
+    svg.appendChild(p);
+    if(e[2]){
+      var t=document.createElementNS('http://www.w3.org/2000/svg','text');
+      t.setAttribute('x',(sx+tx)/2); t.setAttribute('y',m-6);
+      t.setAttribute('text-anchor','middle'); t.setAttribute('font-size','12');
+      t.setAttribute('font-family','-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif');
+      t.setAttribute('fill', lit?'#58180D':'#7C6952');
+      t.setAttribute('style','paint-order:stroke;stroke:#FBF1DA;stroke-width:5px;stroke-linejoin:round');
+      t.textContent=e[2];
+      svg.appendChild(t);
+    }
+  });
+}
+
+var DOWN=['n16','w7a','w7b','n17','n18','w8a','w8b'];
+function paint(){
+  var dead=map['w6b'].dataset.on==='1';
+  DOWN.forEach(function(k){
+    map[k].classList.toggle('off',dead);
+    if(dead) map[k].dataset.on='0';
+  });
+  var open=map['w8a'].dataset.on==='1';
+  map['B'].classList.toggle('off', dead || (map['w8b'].dataset.on==='1'&&!open));
+  map['B'].style.borderColor = open ? '#8A6A2F' : '';
+  draw();
+}
+
+cv.addEventListener('click',function(ev){
+  var b=ev.target.closest('.bx');
+  if(!b||b.classList.contains('off')) return;
+  if(b.dataset.grp){
+    cv.querySelectorAll('[data-grp="'+b.dataset.grp+'"]').forEach(function(o){ if(o!==b) o.dataset.on='0'; });
+  }
+  b.dataset.on = b.dataset.on==='1' ? '0' : '1';
+  det.innerHTML = (b.dataset.label ? '<span class="who">'+b.dataset.label+'</span>' : '') + b.dataset.txt;
+  paint();
+});
+document.getElementById('clr').addEventListener('click',function(){
+  cv.querySelectorAll('.bx').forEach(function(o){ o.dataset.on='0'; o.classList.remove('off'); });
+  det.textContent='Click any box to read what it does to the story.';
+  paint();
+});
+window.addEventListener('resize',draw);
+paint();
+})();
+</script>
+</body>
+</html>
