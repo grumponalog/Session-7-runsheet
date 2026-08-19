@@ -512,6 +512,7 @@
     <button class="pop tr" data-pop="truth-bargain">The bargain</button>
     <button class="pop tr" data-pop="truth-why">Why now</button>
     <button class="pop tr" data-pop="truth-hole">The hole in the town</button>
+    <button class="pop tr" data-pop="truth-curfew">Why they obey the curfew</button>
     <button class="pop tr" data-pop="truth-thing">What the thing is</button>
   </div>
 
@@ -628,6 +629,8 @@
         <div><div class="t">12:00</div><div class="d">The walkers are on the streets until first light.</div></div>
       </div>
       <p><strong>The rule is not "don't be seen." It is "don't look."</strong> Nobody says this to the party.</p>
+      <p class="note"><b>Nobody in Halloway can tell you why any of this is the rule.</b> The Curse takes the
+        explanation and leaves the habit. See <em>Why they obey the curfew</em> on the Prep tab.</p>
       <p>Being outside is not automatically fatal. Being <strong>seen and answered</strong> is. A walker that fixes on a creature approaches, stops at a distance, and Calls. Walk away and it does not pursue.</p>
     </div>
   </details>
@@ -935,7 +938,7 @@
   <div class="beat" id="b-collection">
     <h3>Midnight — the collection</h3>
     <div class="where"><span class="k">6</span><button class="jump" data-goto="loc">The motel street</button></div>
-    <div class="pops"><button class="pop rd" data-pop="read-collection">Read aloud</button></div>
+    <div class="pops"><button class="pop rd" data-pop="read-collection">Read aloud</button><button class="pop tr" data-pop="truth-curfew">Why they obey it</button></div>
     <span class="drop">first-sighting <span class="ch">#play · before they know what it is</span></span>
     <span class="drop">collection <span class="ch">#play · run the challenge over this</span></span>
     <p><strong>Skill challenge first.</strong> A neighbour comes out to walk them in. Then a second. Then six, then a deputy. Nobody raises their voice.</p>
@@ -1781,6 +1784,24 @@ Object.assign(window.POP, {
     if(e.key==='Escape' && ov.classList.contains('on')){ close(); e.stopPropagation(); }
   });
 })();
+</script>
+<script>
+Object.assign(window.POP, {
+
+"truth-curfew":["tr","Why the town obeys a rule it cannot explain",`
+<p>The Curse eats <b>explanation</b>, not behaviour. Look at when it fires: it takes the sentence whenever somebody tries to say why. It never once stops anybody from closing a curtain. Halloway has lost the reason and kept the practice.</p>
+<p>Three things carry the rule:</p>
+<p><b>Habit.</b> Nobody is remembering the curfew each night, they are performing it. You do not need to know why you lock a door in order to lock it, and they have been doing this for eighteen months.</p>
+<p><b>Print.</b> The four-line notice goes out in the newsletter with the water bill every month, unsigned. Paper does not drink the water, so the notice is the only reason the actual time has survived at all. Nobody in the Sheriff's Office can tell you who first wrote it, and it says <em>this is not a formal ordinance</em> because whoever typed it could not remember what it was instead.</p>
+<p><b>Fear.</b> Dread is not a memory. At eleven o'clock the entire town is frightened, and not one of them could tell you what of.</p>
+<h4>Why eleven, when the walkers come at midnight</h4>
+<p>Because the town does not know the real time and has been quietly over-correcting for a year and a half. It is the same instinct as the clocks: somebody set theirs forward, then somebody else did, and now every clock in Halloway runs three or four minutes fast and nobody can say who started it. The hour of margin is a frightened town's rounding error.</p>
+<h4>What the escorts think is happening</h4>
+<p>Nothing coherent. Ask six of them and you get six bad answers, delivered with total conviction: people get lost out there, there's animals, it isn't safe, my mother always said. The explanations are improvised fresh each time, because the real one is eaten before it reaches the mouth.</p>
+<p class="dmnote"><b>That is why they apologise while they are physically moving somebody.</b> They know they cannot justify it. They are certain anyway. Play them as people doing a necessary thing they are embarrassed to be unable to defend, and the collection stops being a mob and starts being unbearable.</p>
+<p class="dmnote"><b>This is the most likely question at the table and there is no in-world answer to it.</b> If a player asks a resident, run the Curse. If a player asks you, the answer is on this page and they are never getting it from inside the fiction.</p>`]
+
+});
 </script>
 </body>
 </html>
