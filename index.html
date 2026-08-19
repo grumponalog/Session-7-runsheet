@@ -338,6 +338,81 @@
     font:700 10px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--dimmer);
   }
 
+  /* ---------- popup chips ---------- */
+  .pops{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 4px}
+  .pop{
+    appearance:none;cursor:pointer;background:var(--panel);
+    font:600 11.5px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;
+    padding:7px 11px;border:1px solid var(--line2);
+  }
+  .pop::before{margin-right:7px;font-weight:400}
+  .pop.rd{color:var(--spoken);border-color:rgba(138,106,47,.55)}
+  .pop.rd::before{content:"\201C"}
+  .pop.pr{color:var(--drop);border-color:rgba(31,74,92,.5)}
+  .pop.pr::before{content:"\25A4"}
+  .pop.tr{color:var(--never);border-color:rgba(88,24,13,.45)}
+  .pop.tr::before{content:"\25C6"}
+  .pop:hover{background:#FDF6E4;border-color:currentColor}
+
+  /* ---------- modal ---------- */
+  #ov{
+    position:fixed;inset:0;z-index:200;display:none;
+    background:rgba(36,26,18,.55);
+    align-items:flex-start;justify-content:center;padding:6vh 20px 4vh;
+    overflow-y:auto;
+  }
+  #ov.on{display:flex}
+  #md{
+    background:var(--bg);border:1px solid var(--line2);
+    box-shadow:0 10px 40px rgba(36,26,18,.35);
+    max-width:760px;width:100%;
+  }
+  #md .top{
+    display:flex;align-items:baseline;gap:14px;
+    padding:20px 26px 14px;border-bottom:1px solid var(--line);
+  }
+  #md .kind{
+    font:700 10px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;
+    border:1px solid currentColor;padding:5px 8px;flex:none;
+  }
+  #md .kind.rd{color:var(--spoken)} #md .kind.pr{color:var(--drop)} #md .kind.tr{color:var(--never)}
+  #md h3{margin:0;font-size:21px;color:var(--red);font-variant:small-caps;letter-spacing:.02em}
+  #md .x{
+    margin-left:auto;appearance:none;background:none;border:0;cursor:pointer;
+    font:400 24px/1 var(--sans);color:var(--dimmer);padding:0 2px;
+  }
+  #md .x:hover{color:var(--red)}
+  #md .bd{padding:20px 26px 26px}
+  #md .bd p{margin:0 0 13px}
+  #md .bd p:last-child{margin-bottom:0}
+  #md .bd .spoken{
+    font:italic 17.5px/1.68 var(--serif);color:#2B2015;
+    background:#EFE2C4;border:1px solid var(--line2);border-left:5px solid var(--spoken);
+    padding:16px 20px;margin:0 0 16px;
+  }
+  #md .bd .dmnote{
+    font:14.5px/1.6 var(--sans);color:var(--dim);
+    border-left:2px solid var(--line2);padding-left:14px;margin:14px 0 0;
+  }
+  #md .bd .dmnote b{color:var(--red2)}
+  #md .bd .form{
+    font:12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;
+    background:#FDF6E4;border:1px solid var(--line);
+    padding:16px 18px;margin:0 0 14px;white-space:pre-wrap;overflow-x:auto;
+    color:#2B2015;
+  }
+  #md .bd .hand{
+    font:italic 16px/1.5 var(--serif);color:#3A2A1C;
+    border:1px dashed var(--line2);padding:14px 18px;margin:0 0 14px;
+  }
+  #md .bd h4{
+    font:700 10.5px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;
+    color:var(--red);margin:20px 0 9px;
+  }
+  #md .bd table{width:100%;border-collapse:collapse;font:13.5px/1.5 var(--sans);margin:0 0 14px}
+  #md .bd th{text-align:left;font-weight:700;color:var(--red);border-bottom:1px solid var(--line2);padding:6px 8px 7px}
+  #md .bd td{border-bottom:1px solid var(--line);padding:6px 8px;color:var(--dim)}
+
   /* jump targets must clear the sticky header */
   .beat,.card,.loc,.stat,.who,.mech{scroll-margin-top:132px}
 
@@ -432,6 +507,13 @@
 <!-- ============ PREP ============ -->
 <section class="tab on" id="prep">
   <h2>Prep <em>before anyone logs on</em></h2>
+  <div class="pops" style="margin:0 0 18px">
+    <button class="pop tr" data-pop="truth-crime">The crime</button>
+    <button class="pop tr" data-pop="truth-bargain">The bargain</button>
+    <button class="pop tr" data-pop="truth-why">Why now</button>
+    <button class="pop tr" data-pop="truth-hole">The hole in the town</button>
+    <button class="pop tr" data-pop="truth-thing">What the thing is</button>
+  </div>
 
   <div class="card">
     <h3>Core concept</h3>
@@ -485,7 +567,7 @@
       <span><i class="swatch" style="background:var(--drop)"></i> Posted, an image drop</span>
       <span><i class="swatch" style="background:var(--never)"></i> Never, hard don't</span>
     </div>
-    <p class="note">Tabs switch with keys <b>1–9</b>. Blue <b>Reference</b> chips jump to the appendix and highlight what you came for. Drop checkboxes reset if you reload the page.</p>
+    <p class="note">Tabs switch with keys <b>1–9</b>. Gold chips open the words to read out, blue chips open the exact text on a prop, red chips open what is actually going on and never gets said. Escape closes them. Blue <b>Reference</b> chips jump to the appendix and highlight what you came for. Drop checkboxes reset if you reload the page.</p>
   </div>
 </section>
 
@@ -766,6 +848,7 @@
   <div class="beat" id="b-briefing">
     <h3>The briefing <span class="time">10 min · at the Lantern</span></h3>
     <div class="where"><button class="jump" data-goto="loc">The Lantern, off-map</button></div>
+    <div class="pops"><button class="pop rd" data-pop="read-briefing">Read aloud</button><button class="pop pr" data-pop="prop-callsheets">The call sheets</button></div>
     <p class="lede">Ezriel has two call sheets off <strong>Unclassified Incident Intake</strong>, the crank extension at Meridian PD that routes to Observation. Six weeks apart, nobody connected them but him.</p>
     <ul>
       <li><strong>Mayor Daniel Crale, Halloway.</strong> Nine missing in eighteen months. No county file. Worked up the chain until somebody handed him a number to get rid of him.</li>
@@ -792,6 +875,7 @@
   <div class="beat" id="b-town">
     <h3>The town, before dark</h3>
     <div class="where"><span class="k">1</span><span class="k">2</span><span class="k">3</span><span class="k">5</span><span class="k">10</span><button class="jump" data-goto="loc">Main Street</button></div>
+    <div class="pops"><button class="pop rd" data-pop="read-town">Read aloud</button><button class="pop pr" data-pop="prop-flyers">The flyers</button><button class="pop pr" data-pop="prop-newsletter">The newsletter</button></div>
     <p>Mayor Crale meets them himself, warm, grateful, apologetic about the drive, opens every door in town. He is the reason they were called. <strong>Play him completely straight.</strong></p>
     <span class="drop">town-day <span class="ch">#play</span></span>
     <span class="drop">flyers <span class="ch">#evidence · back to back, nothing said between</span></span>
@@ -827,6 +911,7 @@
   <div class="beat" id="b-collection">
     <h3>Midnight — the collection</h3>
     <div class="where"><span class="k">6</span><button class="jump" data-goto="loc">The motel street</button></div>
+    <div class="pops"><button class="pop rd" data-pop="read-collection">Read aloud</button></div>
     <span class="drop">first-sighting <span class="ch">#play · before they know what it is</span></span>
     <span class="drop">collection <span class="ch">#play · run the challenge over this</span></span>
     <p><strong>Skill challenge first.</strong> A neighbour comes out to walk them in. Then a second. Then six, then a deputy. Nobody raises their voice.</p>
@@ -856,6 +941,7 @@
   <div class="beat" id="b-cassandra">
     <h3>Cassandra Ardley</h3>
     <div class="where"><span class="k">7</span><button class="jump" data-goto="loc">Cassandra Ardley's house</button></div>
+    <div class="pops"><button class="pop rd" data-pop="read-cassandra">Read aloud</button><button class="pop pr" data-pop="prop-photo">The photograph</button></div>
     <p class="lede">Seventy-five. Left Halloway at nineteen, came back at seventy. Fifty years off that water, <strong>the only person in town who can say Laura Ardley and mean a person.</strong></p>
     <p>She gives them: her sister as a human being, the bullying, the reservoir incident, and the fact that she has been telling people this for five years and they nod and forget. She has stopped expecting to be believed and will be openly surprised when the party writes it down.</p>
     <span class="drop">cassandra <span class="ch">#play · before she speaks</span></span>
@@ -870,6 +956,7 @@
   <div class="beat" id="b-records">
     <h3>The records room</h3>
     <div class="where"><span class="k">4</span><button class="jump" data-goto="loc">Sheriff's Office, 2 Bell Row</button></div>
+    <div class="pops"><button class="pop rd" data-pop="read-records">Read aloud</button><button class="pop pr" data-pop="prop-casefile">The 352 file</button></div>
     <p>Emmet Crale's original file is in the sheriff's basement and it is <strong>intact</strong>, paper doesn't forget.</p>
     <ul>
       <li><strong>Sheriff Ruth Mackey</strong> resists. Not conspiracy, territoriality. Nine people down, nothing to show, and the sixty-year-old file is the only strange thing she has.</li>
@@ -901,6 +988,7 @@
   <div class="beat" id="b-mayor">
     <h3>The mayor</h3>
     <div class="where"><span class="k">5</span><button class="jump" data-goto="loc">Municipal Building</button></div>
+    <div class="pops"><button class="pop rd" data-pop="read-mayor">Read aloud</button></div>
     <p>Over a drink, reluctantly, because they asked and he is tired of carrying it:</p>
     <div class="line">"I've always thought my father killed those two kids."</div>
     <p>Give him the entire scene. He is credible by every measure available to the table. <strong>No tell, no hesitation, no wrong detail.</strong> He believes it completely; it is the one fragment the thing left him.</p>
@@ -948,6 +1036,7 @@
   <div class="beat" id="b-remains">
     <h3>The remains</h3>
     <div class="where"><span class="k">15</span><button class="jump" data-goto="loc">The dam &amp; service road</button></div>
+    <div class="pops"><button class="pop rd" data-pop="read-remains">Read aloud</button><button class="pop pr" data-pop="prop-coroner">The coroner's sheets</button></div>
     <p class="lede">Two sets, sixty years down, and a knife. Reachable, the party has rope, spells, a Ranger, and a reservoir with a service road.</p>
     <span class="drop">coroner-laura + coroner-wes <span class="ch">#evidence · one message, no caption</span></span>
     <p><strong>The flip: the wound track on Laura is angled upward, 22–28°.</strong> Someone shorter. Someone much shorter.</p>
@@ -965,6 +1054,7 @@
   <div class="beat" id="b-knife">
     <h3>Gate the knife</h3>
     <div class="where"><span class="k">8</span><button class="jump" data-goto="loc">Emmet Crale's house</button></div>
+    <div class="pops"><button class="pop pr" data-pop="prop-knife">The knife</button></div>
     <p>Danny will happily let them search his father's house, which means the initials <strong>D.C.</strong> can hand them the answer before they've earned it.</p>
     <p>Keep them out until the remains are up and the wound angle is on the table: he's out of town until tomorrow, or the key is at the hospice.</p>
     <p class="note"><b>Order that works:</b> remains → coroner's sheets → the arithmetic → the house. The knife confirms what they already worked out.</p>
@@ -976,6 +1066,7 @@
   <div class="beat" id="b-drive">
     <h3>The drive</h3>
     <div class="where"><span class="k">10</span><span class="k">16</span><button class="jump" data-goto="loc">The van · Reservoir Road</button></div>
+    <div class="pops"><button class="pop rd" data-pop="read-road">Read aloud</button></div>
     <p>Cedarline is an hour out on a bad road, at night, and they have no vehicle. <strong>The delivery van has been sitting three weeks and the keys are in it.</strong> The driver is on the road with the rest of them.</p>
     <span class="drop">van <span class="ch">#play · re-post the Act 1 file</span></span>
     <p class="note"><b>The battery is flat.</b> It cranks and doesn't catch. Now they're standing on a dark street at 12:40 while somebody pops the hood. Ford or Hedy solves it in a round or two.</p>
@@ -996,6 +1087,7 @@
   <div class="beat" id="b-hospice">
     <h3>The hospice window</h3>
     <div class="where"><button class="jump" data-goto="loc">Cedarline Care, an hour out</button></div>
+    <div class="pops"><button class="pop rd" data-pop="read-corridor">The corridor</button><button class="pop rd" data-pop="read-emmet">Emmet speaks</button></div>
     <span class="drop">corridor <span class="ch">#play · stage Laura in it</span></span>
     <p>One lit door at the end of a dark hall. <strong>Laura is somewhere between them and the lamp.</strong> She's warm, she's confused, she doesn't know what she's doing, and she asks them, reasonably, kindly, not to go in and wake him.</p>
     <span class="drop">emmet <span class="ch">#play</span></span>
@@ -1016,6 +1108,7 @@
   <div class="beat" id="b-thing">
     <h3>The thing comes up</h3>
     <div class="where"><span class="k">15</span><button class="jump" data-goto="loc">The dam &amp; service road</button></div>
+    <div class="pops"><button class="pop rd" data-pop="read-thing">Read aloud</button></div>
     <p>Only when the hole starts closing, the truth said out loud, the remains recovered, or Emmet's window opening. Run it at the reservoir; the water is where it has to be fought.</p>
     <span class="drop">the-thing <span class="ch">#play · post once, never again</span></span>
     <p class="note"><b>Decide this before you run it.</b> "Post once" and a D&amp;D Beyond avatar cannot both be true, an avatar sits in the initiative tracker for the whole fight and any player can open it and stare. Either give it a plain token and no avatar art, keeping this drop as its only appearance, or set the avatar and accept that the scarcity is gone. <b>Map the reservoir. Do not map the road.</b></p>
@@ -1036,6 +1129,7 @@
   <div class="beat" id="b-choice">
     <h3>The Choice</h3>
     <div class="where"><span class="k">15</span><button class="jump" data-goto="loc">The dam &amp; service road</button></div>
+    <div class="pops"><button class="pop rd" data-pop="read-choice">Read aloud</button></div>
     <p>No image. Nothing on screen. Just the question.</p>
     <p class="note"><b>Both gates are in this act.</b> Walk the <a href="map.html">decision map</a> if you want to see which endings are still reachable given what they have actually done, the van and the hospice are the only two forks in the session that change the answer.</p>
     <div class="grid2">
@@ -1239,6 +1333,67 @@
 
 </main>
 
+<div id="ov" role="dialog" aria-modal="true" aria-labelledby="mdt">
+  <div id="md">
+    <div class="top"><span class="kind" id="mdk">Read</span><h3 id="mdt">&nbsp;</h3>
+      <button class="x" id="mdx" aria-label="Close">&times;</button></div>
+    <div class="bd" id="mdb"></div>
+  </div>
+</div>
+<script>
+window.POP = {
+
+"read-briefing":["rd","The briefing",`
+<div class="spoken">Ezriel doesn't sit down. He puts two call sheets on the desk in front of you, one pink and one yellow, six weeks apart, and he lets you read them before he says anything. When you look up: that's everything I have. No file, no compass reading, nothing from anybody else. A mayor who can't get a straight answer in his own town, and a night nurse who called at four in the morning and apologised twice for it.</div>
+<p class="dmnote"><b>Ezriel has nothing else and he should say so.</b> The Lantern's file on Halloway is empty. If they push, he stays empty.</p>`],
+
+"read-town":["rd","The town, before dark",`
+<div class="spoken">Main Street on a warm afternoon. A diner with a hand-lettered board out front, a hardware store with two men talking on the step and a dog asleep in the shade of the awning, a bank sign flashing the time and then the temperature. Somebody waves at you from across the road because you're new, not because they want anything. It is a nice town and it is pleased to see you.</div>
+<p class="dmnote"><b>Play this straight and without irony.</b> The wrongness arrives in the gaps later. Right now it is a good place to live.</p>`],
+
+"read-collection":["rd","The collection",`
+<div class="spoken">Two houses down a porch light comes on and then goes straight back off. A screen door. A woman in a housecoat with a coat pulled over the top of it comes down the steps and starts toward you, and she is already talking before she is close enough for you to hear her. Then a second door. Then a third. Six of them, with a deputy at the back, and every one of them is apologising while they walk you off the street.</div>
+<p class="dmnote"><b>Nobody raises their voice.</b> Three successes before three failures at DC 14. Success buys fragments, not an exit.</p>`],
+
+"read-cassandra":["rd","Cassandra Ardley",`
+<div class="spoken">She has the kettle on before you have finished explaining who you are. There is an oilcloth on the table and a shoebox already open on it, photographs laid out in rows like she has been waiting to show somebody. She sits down across from you and says: you're asking about Laura. Nobody has asked about Laura in five years.</div>
+<p class="dmnote"><b>She expects not to be believed</b> and will be openly surprised when somebody writes it down.</p>`],
+
+"read-records":["rd","The records room",`
+<div class="spoken">Mackey's office is one room, a filing cabinet, and a window that doesn't open. She is standing in the doorway with her arms folded when you get there and she does not move out of it. Nine people, she says. Nine, in eighteen months. I have a curfew nobody voted on and a drawer full of nothing. So tell me what you think you are going to find down there.</div>
+<p class="dmnote"><b>She folds on any reasonable push.</b> Persuasion DC 13, or a cop talking to a cop. She is not the obstacle.</p>`],
+
+"read-mayor":["rd","The mayor, over a drink",`
+<div class="spoken">He pours two fingers of something and then doesn't drink it. I have never told anybody this, he says. I have always thought my father killed those two kids. He dragged that reservoir alone at three in the morning, and he came back different, and he never ran for anything again as long as he lived. I have spent sixty years being the kind of man he wasn't.</div>
+<p class="dmnote"><b>No tell, no hesitation, no wrong detail.</b> Every word of it is true except who did it, and he believes all of it.</p>`],
+
+"read-remains":["rd","The remains",`
+<div class="spoken">They come up together, wrapped in sixty years of silt. Two of them, smaller and lighter than you expect, and one of them still has a shoe. There is a knife in the mud beside them. The water closes over the place they came out of as though nothing had been taken out of it at all.</div>
+<p class="dmnote"><b>Hand over both coroner's sheets together and say nothing about the boxes.</b></p>`],
+
+"read-road":["rd","The road to Cedarline",`
+<div class="spoken">The high beams reach maybe eighty feet and then stop. Inside them the road is empty, and then it isn't. A man standing on the centre line with his hands at his sides. Fifty feet past him another one on the shoulder. Past that, a third. None of them are in your lane. None of them are moving. The left lane is completely open.</div>
+<p class="dmnote"><b>Do not roll anything.</b> Post the road and ask what they do. Driving past should cost nothing.</p>`],
+
+"read-corridor":["rd","The hospice corridor",`
+<div class="spoken">Four in the morning at Cedarline. The corridor is long, the floor has a wet shine on it, and there is exactly one door with light behind it, right at the far end. Halfway down, standing between you and that door, is a girl in a diner uniform. She looks up when she hears you and her face goes apologetic. He's sleeping, she says. Could you come back.</div>`],
+
+"read-emmet":["rd","Emmet Crale",`
+<div class="spoken">He is very small in the bed. When he notices you he doesn't ask who you are. He says: did they ever find the other one. And then, to somebody standing where you are not: tell Danny it's alright. Tell him I said not him. Then he looks back at you and asks, kindly, whether you have come about the water.</div>
+<p class="dmnote"><b>Gentle gets the terms out loud.</b> Pushed hard, he gets frightened and stops making sense. He does not know what year it is and he thinks Danny is twelve.</p>`],
+
+"read-thing":["rd","The thing comes up",`
+<div class="spoken">The reservoir doesn't break. It rises. A shoulder of water the same colour as the water lifts off the surface and keeps lifting, and there are faces in it, close under the skin, forming and coming apart before any of them finish. It does not come at you. It says a name. Then another one. Then nine at once, and one of them is yours.</div>
+<p class="dmnote"><b>It never attacks first and it should never read as enraged.</b> If they disengage, it disengages.</p>`],
+
+"read-choice":["rd","The choice",`
+<div class="spoken">The water is still holding it up. Laura is still standing in front of it with her hands out. Nothing is attacking anybody. Whatever happens next happens because one of you decides that it does.</div>
+<p class="dmnote"><b>No image here.</b> Nothing on screen. Just the question, and then wait as long as it takes.</p>`]
+
+};
+</script>
+
+
 <script>
 (function(){
   var nav = document.getElementById('nav');
@@ -1259,6 +1414,8 @@
   });
   document.addEventListener('keydown', function(e){
     if(e.metaKey||e.ctrlKey||e.altKey) return;
+    var ovEl=document.getElementById('ov');
+    if(ovEl&&ovEl.classList.contains('on')) return;
     if(/^[1-9]$/.test(e.key)){
       var t = tabs[parseInt(e.key,10)-1];
       if(t) show(t.dataset.t);
@@ -1304,6 +1461,239 @@
     tally();
   });
   tally();
+})();
+</script>
+<script>
+Object.assign(window.POP, {
+
+"prop-callsheets":["pr","The intake call sheets",`
+<h4>Sheet A &middot; pink &middot; Y412 / 04 / 19</h4>
+<div class="form">MERIDIAN POLICE DEPARTMENT
+UNCLASSIFIED INCIDENT INTAKE — EXT. 4409
+CALL RECORD
+
+DATE      Y412 CE / 04 / 19          TIME  14:52
+TAKEN BY  Ofc. D. Salk, Public Inquiries
+
+CALLER    CRALE, DANIEL J.
+POSITION  Mayor — Township of Halloway (outlying, unincorporated)
+CALLBACK  Halloway municipal switch, ask for the office
+
+NATURE OF REPORT
+Caller reports nine (9) missing persons within township limits over
+approx. eighteen (18) months. States no county file has been opened
+and no regional officer has attended. Provided names on request:
+
+     HOLLIS, M.        BRAY, T.          OKONKWO, A.
+     LINDQVIST, P.     SALAS, R.         WHITTAKER, J.
+     DUNN, E.          DUNN, MAEVE       [unnamed courier]
+
+Caller states residents will not discuss the matter and that he
+"cannot get a straight answer in his own town."
+
+Caller was calm and coherent. Caller has called three (3) other
+offices this month per his own account.
+
+DISPOSITION   Referred — no jurisdiction
+CLASSIFICATION   &#9744; Nuisance   &#9744; Delusional   &#9746; Unclassified</div>
+<h4>Sheet B &middot; yellow &middot; Y412 / 06 / 02</h4>
+<div class="form">MERIDIAN POLICE DEPARTMENT
+UNCLASSIFIED INCIDENT INTAKE — EXT. 4409
+CALL RECORD
+
+DATE      Y412 CE / 06 / 02          TIME  04:41
+TAKEN BY  Ofc. D. Salk, Public Inquiries
+
+CALLER    withheld — night staff, Cedarline Care (outlying)
+CALLBACK  declined
+
+NATURE OF REPORT
+Caller reports a resident, male, 95, advanced cognitive decline,
+who repeats the same three statements during night hours. Caller
+states she has worked nights eleven years and "this one is
+different." Statements recorded as given:
+
+     "Did they ever find the other one."
+     "Tell Danny it's alright."
+     "I said not him."
+
+Caller asked whether there was "somewhere else" to report this.
+Caller was advised there was not. Caller apologized twice and
+disconnected.
+
+DISPOSITION   No action
+CLASSIFICATION   &#9744; Nuisance   &#9744; Delusional   &#9746; Unclassified</div>
+<p class="dmnote"><b>I said not him</b> is the whole bargain, sitting on the first prop of the night and meaningless until Act 3. Do not point at it. Re-post this sheet when Emmet starts talking.</p>`],
+
+"prop-flyers":["pr","The missing-persons flyers",`
+<p>One sheet, nine cells, photocopy-degraded at different levels. Top row nearly illegible, bottom row crisp and white.</p>
+<div class="form">HAVE YOU SEEN
+[NAME], [AGE]
+Last seen [MONTH] Y41[1/2], Halloway
+Contact Halloway Sheriff — 2 Bell Row</div>
+<table><tr><th>Name</th><th>Age</th><th>Last seen</th></tr>
+<tr><td>Hollis, Marguerite</td><td>68</td><td>01 / Y411</td></tr>
+<tr><td>Bray, Thomas</td><td>54</td><td>03 / Y411</td></tr>
+<tr><td>Okonkwo, Adaeze</td><td>41</td><td>06 / Y411</td></tr>
+<tr><td>Lindqvist, Per</td><td>77</td><td>08 / Y411</td></tr>
+<tr><td>Salas, Rosa</td><td>33</td><td>11 / Y411</td></tr>
+<tr><td>Whittaker, June</td><td>61</td><td>01 / Y412</td></tr>
+<tr><td>Dunn, Everett</td><td>70</td><td>03 / Y412</td></tr>
+<tr><td>Dunn, Maeve</td><td>44</td><td>03 / Y412</td></tr>
+<tr><td><em>no flyer, the courier</em></td><td>&mdash;</td><td>07 / Y412</td></tr></table>
+<p class="dmnote"><b>Eight flyers on the sheet, nine missing.</b> Nobody made one for the courier because nobody in Halloway knew his name. The two Dunns share a month: Everett went out to something, Maeve went out to Everett. If somebody counts, that is a real clue and they earned it.</p>`],
+
+"prop-casefile":["pr","The 352 case file",`
+<div class="form">HALLOWAY TOWNSHIP — SHERIFF'S OFFICE
+INVESTIGATION LOG (cont.)          FILE 352-11
+
+CASE   ARDLEY, LAURA M. (18) — missing
+       HARROW, WESTON (18) — missing
+OPENED Y352 CE / 09 / 15
+
+09/15  Report taken 07:10 from H. Ardley (father) and separately
+       09:20 from M. Harrow (mother). Both juveniles last accounted
+       for evening of 09/14. ARDLEY finished shift 23:40 per employer.
+
+09/15  Volunteer search organized, 40+ persons. Reservoir road,
+       treeline, Corliss field, the quarry. Negative.
+
+09/16  Search continued. Negative.
+
+09/17  Reservoir DRAGGED. 03:00–05:40. Attending: E. CRALE.
+       No other personnel. NEGATIVE — no recovery, no evidence,
+       no disturbance of bank or bed.
+
+09/18  Search suspended pending new information.
+
+09/26  No new information.
+
+10/04  No new information.
+
+               Recommend RUNAWAY, joint. File open, inactive.
+
+                                        E. Crale, Sheriff
+                                        Y352 CE / 10 / 04</div>
+<p>Bottom right, well below the signature, in ballpoint over the typewriter ink, pressed hard enough to emboss the back of the page. Not police handwriting.</p>
+<div class="hand">one of us has to</div>
+<p class="dmnote"><b>Hand it over without comment.</b> It reads as guilt. It is a receipt. If nobody reads the bottom of the page, re-post it in Act 3 beside the pink sheet and let the handwriting do the work.</p>`],
+
+"prop-photo":["pr","The school photograph, Y352",`
+<p>Sepia-shifted, thumb-worn at one corner. Thirty-odd kids on risers outside the old schoolhouse. <b>Laura</b> center-left, eighteen, laughing at something out of frame. <b>Wes</b> two along, taller, arm slung round a friend's shoulders, mid-shout. At the far right edge, half out of frame and looking directly into the lens while everybody else looks elsewhere, <b>a small dark-haired boy of about twelve.</b></p>
+<p>On the back, recent ballpoint on seventy-five-year-old paper:</p>
+<div class="hand">Laura, spring before.<br>The other one is Wes Harrow.<br>I don't know who the little boy is.<br><span style="display:block;text-align:right">&mdash; C.A.</span></div>
+<p class="dmnote"><b>Cassandra genuinely does not know.</b> She was fifteen and she left at nineteen. Anyone in Halloway who looks at the boy will not recognise him either. Show it to the mayor and he will not recognise himself.</p>`],
+
+"prop-coroner":["pr","The coroner's sheets",`
+<p>Modern, clinical, printed on crisp white. Not aged. The contrast with the 352 file is the point.</p>
+<div class="form">SHEET 1 — REMAINS "A" (Laura)
+
+Entry wound just inferior to xiphoid process
+Trajectory upward, 22-28 degrees
+Angle of ascension 22-28 degrees
+Estimated path length 6.0-7.2 cm
+
+MANNER OF DEATH — all boxes left unchecked</div>
+<div class="form">SHEET 2 — REMAINS "B" (Wes)
+
+Three sharp-force injuries, lateral neck
+No hesitation wounds present
+Trajectory lateral, no upward component
+
+INJURY LOCATION — Neck checked
+MANNER OF DEATH — HOMICIDE checked</div>
+<p class="dmnote"><b>The sheets give the evidence, not the inference.</b> There is no assailant-height line printed anywhere on them. That leap is a Medicine or Investigation check, or somebody staring at the number long enough. 22 to 28 degrees upward into a standing eighteen-year-old puts the attacker around 140 to 150 cm.</p>
+<p class="dmnote"><b>The checkbox difference is deliberate.</b> Three wounds to the neck with no hesitation was easy to name. One upward thrust under the sternum was not. That is The Two Accounts rendered as paperwork, and it is a live clue: a single upward wound is consistent with a struggle, which is also what Danny would say if he could remember.</p>`],
+
+"prop-newsletter":["pr","The town newsletter",`
+<p>Cheap two-colour print, folded in thirds, the kind that goes out with the water bill. Front page above the fold: Mayor Daniel Crale cutting a ribbon at the library reopening, surrounded by people plainly pleased to be near him.</p>
+<div class="form">FORTY YEARS OF SERVICE
+Halloway's longest-serving mayor marks four decades in
+public life this month. "I never planned on any of it,"
+Crale told the Bulletin. "I just couldn't stand the idea
+of leaving."
+
+Inside: library hours · water board minutes · a note from
+the Sheriff's Office regarding EVENING SAFETY</div>
+<p>Inside, bottom of page two, four lines, unsigned:</p>
+<div class="form">FROM THE SHERIFF'S OFFICE
+Residents are reminded to be indoors by 11:00 PM and to
+keep exterior lights off after that hour. This is not a
+formal ordinance. We appreciate your cooperation.</div>
+<p class="dmnote"><b>This is not a formal ordinance</b> is the most frightening sentence in the props package, and it is printed under the library hours.</p>`],
+
+"prop-knife":["pr","The knife",`
+<p>A small hunting knife, wrong scale for a grown man's hand, in a cigar box under a floorboard in Emmet Crale's house. Cleaned thoroughly, sixty years ago, by somebody who knew how. Dust on the box and none on the knife.</p>
+<p>His wife thought it was for hunting. There are initials scratched into the handle by a boy who was proud of it: <b>D.C.</b></p>
+<p class="dmnote"><b>Gate this.</b> Order that works: remains, then the coroner's sheets, then the arithmetic, then the house. The knife should only ever confirm something they already worked out.</p>`]
+
+});
+</script>
+<script>
+Object.assign(window.POP, {
+
+"truth-crime":["tr","The crime, Year 352",`
+<p>Laura Ardley, eighteen, walking home from a shift a little before midnight. She meets Wes Harrow, eighteen. They kiss.</p>
+<p><b>Danny Crale, twelve, is watching.</b> Wes and his friends had spent two years on him, the sustained ritual kind, with a nickname the whole school used. The worst of it happened at the reservoir, where they held him under. Laura had told Wes to lay off, once, publicly. That single kindness is why Danny fixated on her.</p>
+<p>He has a knife. He kills Wes in a rage he could not have explained then and cannot reach now. Laura screams. He puts a hand over her mouth to stop the noise and the knife goes into her chest. They lock eyes. She dies.</p>
+<p>He drags both bodies into the reservoir. The place where he was drowned.</p>
+<p class="dmnote"><b>Panic, or silencing?</b> Not recoverable. The thing holds Laura's experience and Danny's intent and they do not match. From where she stood she was murdered. From where he stood he panicked. Neither is a lie and there is no reconciling them, which is why the coroner could not check a box.</p>`],
+
+"truth-bargain":["tr","The bargain",`
+<p>Emmet Crale did not go out to the reservoir at three in the morning to hide the bodies. He went out to find them, and he did, and then something else found him.</p>
+<p>There is a rift in the water. Small, old, unremarkable. What came up out of it that night was not yet what it would become, and it offered him exactly the thing he needed while he stood waist-deep in water above his son's work:</p>
+<div class="hand">It can take the night out of one of them. Not both. Somebody has to hold it.</div>
+<p><b>Emmet says: not him. He's twelve.</b></p>
+<p>That is the entire transaction. It took the memory out of Danny and left it in his father, whole, for sixty years. Which is why Emmet's is the only uneaten copy, why he never went near that water again, and why every road in this case ends at one hospice bed.</p>
+<p class="dmnote"><b>He thought he bought one night.</b> He did not sell a town. The town was interest.</p>`],
+
+"truth-why":["tr","Why it is happening now",`
+<p>For sixty years the thing ate small. Enough to feed itself and to keep anybody from thinking too hard. The only two figures it could hold completely were Laura and Wes, the origin meal, which is exactly how you get an urban legend and nothing more.</p>
+<p><b>Emmet is dying, and dementia is finishing what the bargain started.</b> As the last uneaten copy dissolves, the thing's claim completes and its grip tightens. It did not get hungrier. It got stronger.</p>
+<p><b>And the new ones are better.</b> Laura and Wes are composites, assembled out of sixty years of secondhand town memory, sweetened and sanded and never quite right. The recently taken are first-person recordings. It drained them directly, so it has them from the inside. The newest walkers are the most convincingly themselves, which is why Halloway is losing people faster. The lures are improving.</p>
+<p class="dmnote"><b>What changed on the street:</b> the walkers used to pass by without looking up. Now they stop outside a specific house and say a name. And people go out to them, not carelessly but the opposite, because it is your wife and she is right there and she is calling you.</p>`],
+
+"truth-hole":["tr","The hole in the town",`
+<p>Halloway is not hiding anything. There is no conspiracy, no pact, nobody keeping a secret. <b>The town has a hole in it.</b></p>
+<p>Every tap in Halloway runs off the reservoir, which means the thing has been eating the town's memory a mouthful at a time for sixty years. Residents cannot tell the party about the curfew because the sentence gets taken out of their mouths while they are saying it. They are terrified people improvising a rule that is eighteen months old and they cannot say why.</p>
+<p><b>Paper does not drink the water.</b> The thing can eat every mind in Halloway and it cannot touch a filing cabinet. Files, flyers, photographs, the case file, the #evidence channel, and anything a PC writes down are all immune. That is the party's only reliable instrument and it should feel like one.</p>
+<p class="dmnote"><b>Exempt from the drain:</b> Cassandra Ardley, fifty years off that water, and Hedy, whose systems are not organic. Emmet is off it too, at Cedarline, which is why his mind can decay normally and why nobody can manage what comes out of his mouth.</p>`],
+
+"truth-thing":["tr","What the thing is",`
+<p>It gets no cosmology. Whatever it is, wherever the rift goes, why it wanted a boy's worst night: never answered, tonight or ever. The Lantern's file is empty and Ezriel has nothing. <b>Never call it an oblex at the table. It has no name.</b></p>
+<p><b>One entity, not two.</b> The thing that came through the rift and the thing in the reservoir are the same thing at sixty years' distance. It arrived small. Danny's memory was its first meal and the only food it was ever given.</p>
+<p><b>What it wants.</b> Nothing malicious, and it is not enforcing anything. It is protecting one memory, the way it has since the night that memory was handed to it. The hole in the town, the ghost story, the walkers: all of it is spill.</p>
+<p class="dmnote"><b>Running it:</b> it does not want to kill anyone and should never read as enraged. Every attack is defensive. If the party disengages, it disengages. If the plan runs through the record it cannot stop them filing, and it will keep trying anyway.</p>
+<p class="dmnote"><b>If asked directly what it is,</b> the honest in-world answer is that nobody knows, and that should be unsatisfying.</p>`]
+
+});
+
+(function(){
+  var ov=document.getElementById('ov'), md=document.getElementById('md');
+  var k=document.getElementById('mdk'), t=document.getElementById('mdt'), b=document.getElementById('mdb');
+  var last=null;
+  var NAME={rd:'Read aloud',pr:'Prop text',tr:'DM only'};
+  function open(key,src){
+    var e=window.POP[key]; if(!e) return;
+    k.className='kind '+e[0]; k.textContent=NAME[e[0]];
+    t.textContent=e[1]; b.innerHTML=e[2];
+    ov.classList.add('on'); md.scrollTop=0; ov.scrollTop=0;
+    last=src||null;
+    document.getElementById('mdx').focus();
+  }
+  function close(){
+    ov.classList.remove('on'); b.innerHTML='';
+    if(last){ try{ last.focus(); }catch(e){} }
+  }
+  document.addEventListener('click',function(e){
+    var c=e.target.closest('.pop');
+    if(c){ open(c.dataset.pop,c); return; }
+    if(e.target.closest('#mdx')){ close(); return; }
+    if(e.target===ov){ close(); }
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape' && ov.classList.contains('on')){ close(); e.stopPropagation(); }
+  });
 })();
 </script>
 </body>
